@@ -1147,8 +1147,9 @@
   </main>
 
   <!-- MODAL: MASUK & DAFTAR GRATIS -->
-  <div id="authModalBackdrop" class="auth-modal-backdrop">
-    <div class="auth-dialog-card">
+  <div id="authModalBackdrop" class="auth-modal-backdrop" onclick="if(event.target===this) closeAuthModal();">
+    <div class="auth-dialog-card" style="position: relative;">
+      <button type="button" onclick="closeAuthModal()" style="position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.25rem; font-weight: 700; color: #94a3b8; cursor: pointer; line-height: 1; z-index: 10;">✕</button>
       <div class="auth-tabs-header">
         <button id="tabBtnLogin" class="auth-tab-btn active" onclick="switchAuthTab('login')">Masuk Akun</button>
         <button id="tabBtnRegister" class="auth-tab-btn" onclick="switchAuthTab('register')">Daftar Gratis</button>
@@ -1379,6 +1380,13 @@
       checkAuthSession();
       fetchLeaderboard();
       setInterval(fetchLeaderboard, 30000);
+
+      // Tutup modal ketika tombol Escape (Esc) ditekan
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeAuthModal();
+        }
+      });
     });
 
     // AUTH LOGIC
