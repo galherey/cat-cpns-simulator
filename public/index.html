@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulasi CAT CPNS - Platform Tryout & Pembahasan Langkah demi Langkah</title>
+  <title>GARUDA CAT — Platform Simulasi Ujian SKD CPNS Terstandar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Kaushan+Script&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1d5ef1;
-      --primary-hover: #1649de;
-      --primary-dark: #0f172a;
-      --brand-amber: #f59e0b;
-      --brand-amber-light: #fef3c7;
-      --success: #10b981;
-      --success-dark: #047857;
-      --danger: #ef4444;
-      --warning: #f59e0b;
-      --bg: #f8fafc;
-      --surface: #ffffff;
+      --brand-dark: #090d16;
+      --brand-teal: #0f766e;
+      --brand-teal-light: #14b8a6;
+      --brand-indigo: #4338ca;
+      --brand-indigo-light: #6366f1;
+      --accent-gold: #f59e0b;
+      --accent-gold-light: #fef3c7;
+      --success: #059669;
+      --danger: #e11d48;
+      --bg-base: #f8fafc;
+      --bg-card: #ffffff;
       --border: #e2e8f0;
-      --text: #0f172a;
+      --text-main: #0f172a;
       --text-muted: #64748b;
     }
 
@@ -30,96 +30,124 @@
 
     body {
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: var(--bg-base);
+      color: var(--text-main);
       line-height: 1.5;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* Top Sticky Navigation Bar */
-    .site-nav {
+    /* TOP ANNOUNCEMENT & STATS STRIP */
+    .top-stat-strip {
+      background: var(--brand-dark);
+      color: #94a3b8;
+      font-size: 0.8rem;
+      padding: 0.5rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .stat-items-group {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .stat-pill strong {
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* MAIN APP HEADER */
+    .app-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 0.85rem 1.75rem;
+      padding: 0.85rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
-    .brand-group {
+    .brand-logo-area {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.75rem;
       text-decoration: none;
       cursor: pointer;
     }
 
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, var(--primary), #3b82f6);
+    .brand-emblem {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand-teal), var(--brand-indigo));
       color: #fff;
-      border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1.15rem;
-      box-shadow: 0 2px 6px rgba(29, 94, 241, 0.3);
-    }
-
-    .brand-name {
       font-size: 1.25rem;
+      box-shadow: 0 4px 10px rgba(15, 118, 110, 0.25);
+    }
+
+    .brand-title-wrap h1 {
+      font-size: 1.15rem;
       font-weight: 800;
-      color: #0f172a;
       letter-spacing: -0.02em;
+      color: var(--brand-dark);
+      line-height: 1.1;
     }
 
-    .brand-name span {
-      color: var(--brand-amber);
+    .brand-title-wrap span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--brand-teal);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
-    .nav-links {
+    .nav-menu {
       display: flex;
       align-items: center;
-      gap: 1.75rem;
+      gap: 2rem;
       list-style: none;
     }
 
-    .nav-link {
+    .nav-item-link {
       color: var(--text-muted);
       text-decoration: none;
+      font-size: 0.9rem;
       font-weight: 600;
-      font-size: 0.925rem;
       transition: color 0.15s;
-      cursor: pointer;
     }
 
-    .nav-link:hover, .nav-link.active {
-      color: var(--primary);
-    }
-
-    .nav-cta {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
+    .nav-item-link:hover, .nav-item-link.active {
+      color: var(--brand-teal);
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
       padding: 0.65rem 1.25rem;
-      font-weight: 600;
       font-size: 0.9rem;
+      font-weight: 700;
       border-radius: 10px;
       border: none;
       cursor: pointer;
@@ -127,542 +155,483 @@
       text-decoration: none;
     }
 
-    .btn-primary {
-      background: var(--primary);
+    .btn-teal {
+      background: var(--brand-teal);
       color: #fff;
-      box-shadow: 0 2px 8px rgba(29, 94, 241, 0.25);
     }
-
-    .btn-primary:hover {
-      background: var(--primary-hover);
+    .btn-teal:hover {
+      background: #0d645e;
       transform: translateY(-1px);
     }
 
-    .btn-amber {
-      background: var(--brand-amber);
-      color: #78350f;
-      font-weight: 700;
-    }
-
-    .btn-amber:hover {
-      background: #d97706;
+    .btn-indigo {
+      background: var(--brand-indigo);
       color: #fff;
+    }
+    .btn-indigo:hover {
+      background: #3730a3;
     }
 
     .btn-outline {
       background: transparent;
       border: 1.5px solid var(--border);
-      color: var(--text);
+      color: var(--text-main);
     }
-
     .btn-outline:hover {
       background: #f1f5f9;
       border-color: #cbd5e1;
     }
 
-    .btn-danger {
-      background: var(--danger);
-      color: #fff;
+    .btn-amber {
+      background: var(--accent-gold);
+      color: #78350f;
     }
 
-    .btn-danger:hover {
-      background: #dc2626;
+    /* COMMAND CENTER HERO (Desain Baru: Dashboard Hub Tengah) */
+    .command-hub {
+      background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 1.5rem;
     }
 
-    /* Hero Section */
-    .hero-section {
-      background: linear-gradient(135deg, #1d5ef1 0%, #1e40af 100%);
-      color: #fff;
-      padding: 4.5rem 1.5rem 5.5rem;
+    .hub-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hub-header {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #ccfbf1;
+      color: #0f766e;
+      padding: 0.3rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.775rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hub-title {
+      font-size: 2.65rem;
+      font-weight: 800;
+      color: var(--brand-dark);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hub-title span {
+      background: linear-gradient(135deg, var(--brand-teal), var(--brand-indigo));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hub-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* INTERACTIVE QUICK LAUNCH DOCK */
+    .quick-launch-dock {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 1.75rem;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.06);
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    @media (max-width: 860px) {
+      .quick-launch-dock { grid-template-columns: 1fr; }
+      .hub-title { font-size: 2.1rem; }
+    }
+
+    .dock-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+
+    .dock-input, .dock-select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: #f8fafc;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .dock-input:focus, .dock-select:focus {
+      border-color: var(--brand-teal);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+    }
+
+    /* MAIN CONTENT WRAPPER */
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      width: 100%;
+    }
+
+    /* SECTION 1: PASSING GRADE METER & TARGET */
+    .meter-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-headline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .headline-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--brand-dark);
+      letter-spacing: -0.02em;
+    }
+
+    .headline-sub {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Target Meter Grid */
+    .target-meters-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+      .target-meters-grid { grid-template-columns: 1fr; }
+    }
+
+    .meter-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.4rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
       position: relative;
       overflow: hidden;
     }
 
-    .hero-container {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 3rem;
+    .meter-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+
+    .meter-twk::before { background: var(--brand-teal); }
+    .meter-tiu::before { background: var(--brand-indigo); }
+    .meter-tkp::before { background: var(--accent-gold); }
+
+    .meter-top {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
+      margin-bottom: 0.75rem;
     }
 
-    .hero-script-tag {
-      font-family: 'Kaushan Script', cursive;
-      font-size: 1.5rem;
-      color: #fef08a;
-      margin-bottom: 0.5rem;
-      display: inline-block;
-      transform: rotate(-2deg);
-    }
-
-    .hero-headline {
-      font-size: 2.85rem;
+    .meter-code {
       font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-      margin-bottom: 1.25rem;
-    }
-
-    .hero-sub {
       font-size: 1.1rem;
-      color: #bfdbfe;
-      line-height: 1.6;
-      margin-bottom: 2rem;
     }
 
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-btn-white {
-      background: #ffffff;
-      color: var(--primary);
-      padding: 0.85rem 1.6rem;
-      font-weight: 700;
-      font-size: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-    }
-
-    .hero-btn-white:hover {
-      background: #f8fafc;
-      transform: translateY(-2px);
-    }
-
-    .hero-btn-outline {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
-      color: #fff;
-      padding: 0.85rem 1.6rem;
-      font-weight: 600;
-      font-size: 1rem;
-      border-radius: 12px;
-      backdrop-filter: blur(4px);
-    }
-
-    .hero-btn-outline:hover {
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    /* Glassmorphism Category Cards (Right Side of Hero) */
-    .hero-cards-box {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    .glass-card {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(8px);
-      padding: 1.15rem 1.35rem;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: #fff;
-      text-decoration: none;
-      transition: all 0.25s;
-      cursor: pointer;
-    }
-
-    .glass-card:hover {
-      background: rgba(255, 255, 255, 0.22);
-      transform: translateX(6px);
-      border-color: rgba(255, 255, 255, 0.45);
-    }
-
-    .glass-title {
-      font-weight: 700;
-      font-size: 1.05rem;
-    }
-
-    .glass-sub {
-      font-size: 0.8rem;
-      color: #93c5fd;
-    }
-
-    .glass-arrow {
-      font-size: 1.25rem;
-      font-weight: 800;
-      opacity: 0.8;
-    }
-
-    /* Main Section Container */
-    .content-wrap {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 3.5rem 1.5rem;
-      width: 100%;
-    }
-
-    .section-header {
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .section-title {
-      font-size: 1.85rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #0f172a;
-    }
-
-    .section-sub {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-top: 0.25rem;
-    }
-
-    /* Tab Filters (seperti oneshotasn) */
-    .filter-pills {
-      display: flex;
-      gap: 0.45rem;
-      background: #e2e8f0;
-      padding: 0.3rem;
-      border-radius: 12px;
-      flex-wrap: wrap;
-    }
-
-    .pill-btn {
-      padding: 0.45rem 1rem;
-      border-radius: 9px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .pill-btn.active {
-      background: #ffffff;
-      color: var(--primary);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-
-    /* Package Cards Grid */
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    @media (max-width: 960px) {
-      .packages-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-container { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 640px) {
-      .packages-grid { grid-template-columns: 1fr; }
-      .hero-headline { font-size: 2.15rem; }
-    }
-
-    .pkg-card {
-      background: #fff;
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      padding: 1.65rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-      transition: all 0.25s;
-      position: relative;
-    }
-
-    .pkg-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px -4px rgba(0,0,0,0.08);
-      border-color: #93c5fd;
-    }
-
-    .pkg-badge {
-      display: inline-block;
-      padding: 0.25rem 0.65rem;
-      border-radius: 6px;
+    .meter-badge {
       font-size: 0.75rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.85rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
     }
 
-    .badge-skd { background: #dbeafe; color: #1e40af; }
-    .badge-bundling { background: #fef3c7; color: #92400e; }
-    .badge-subtest { background: #e0e7ff; color: #3730a3; }
+    .meter-twk .meter-badge { background: #ccfbf1; color: #0f766e; }
+    .meter-tiu .meter-badge { background: #e0e7ff; color: #3730a3; }
+    .meter-tkp .meter-badge { background: #fef3c7; color: #92400e; }
 
-    .pkg-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #0f172a;
+    .meter-numbers {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
       margin-bottom: 0.5rem;
     }
 
-    .pkg-desc {
+    .meter-target-val {
+      font-size: 1.85rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--brand-dark);
+    }
+
+    .meter-max-val {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .meter-bar-track {
+      background: #f1f5f9;
+      height: 8px;
+      border-radius: 9999px;
+      overflow: hidden;
+      margin: 0.75rem 0;
+    }
+
+    .meter-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+    }
+
+    .meter-twk .meter-bar-fill { width: 43.3%; background: var(--brand-teal); }
+    .meter-tiu .meter-bar-fill { width: 45.7%; background: var(--brand-indigo); }
+    .meter-tkp .meter-bar-fill { width: 69.3%; background: var(--accent-gold); }
+
+    .meter-rule-note {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* SECTION 2: MATRIX PAKET SIMULASI (Tata Letak Matriks Horizontal) */
+    .packages-matrix {
+      margin-bottom: 3.5rem;
+    }
+
+    .matrix-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .matrix-item {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem 1.75rem;
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .matrix-item:hover {
+      border-color: #cbd5e1;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+    }
+
+    .matrix-item.featured {
+      border-color: var(--brand-teal-light);
+      background: linear-gradient(90deg, #ffffff 0%, #f0fdfa 100%);
+    }
+
+    @media (max-width: 900px) {
+      .matrix-item { grid-template-columns: 1fr; gap: 1rem; }
+    }
+
+    .matrix-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--brand-dark);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .matrix-desc {
       font-size: 0.875rem;
       color: var(--text-muted);
-      margin-bottom: 1.25rem;
       line-height: 1.5;
     }
 
-    /* Chips info soal/durasi/komposisi */
-    .pkg-chips {
+    .matrix-specs {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.5rem;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.8rem;
     }
 
-    .pkg-chip {
-      background: #f1f5f9;
-      color: #334155;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.25rem 0.6rem;
-      border-radius: 6px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .pkg-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 1.15rem;
+    .spec-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 0.5rem;
+      color: #334155;
     }
 
-    .pkg-price-free {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--success);
-    }
-
-    .pkg-price-sub {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    /* Passing Grade Table Box */
-    .pg-table-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-      margin-top: 2rem;
-    }
-
-    .pg-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-
-    .pg-table th {
-      background: #f8fafc;
-      padding: 1rem 1.25rem;
-      font-size: 0.85rem;
+    .spec-icon {
+      color: var(--brand-teal);
       font-weight: 700;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--border);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
 
-    .pg-table td {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid #f1f5f9;
-      font-size: 0.925rem;
+    .matrix-difficulty-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.775rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      width: fit-content;
     }
 
-    /* Leaderboard Live / Ranking Section (seperti oneshotasn) */
-    .ranking-section {
+    .diff-adaptive { background: #e0e7ff; color: #3730a3; }
+    .diff-official { background: #ccfbf1; color: #0f766e; }
+    .diff-drill { background: #fef3c7; color: #92400e; }
+
+    /* SECTION 3: LIVE LEADERBOARD (HALL OF FAME LIST) */
+    .leaderboard-container {
       background: #ffffff;
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 2.25rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      margin-top: 3rem;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
     }
 
-    .ranking-top {
+    .ranking-hall-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .ranking-hall-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Podium Card Samping (Desain Baru) */
+    .hall-of-fame-top3 {
+      background: linear-gradient(135deg, var(--brand-dark), #1e293b);
+      color: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .hof-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #f8fafc;
+      margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 1rem;
     }
 
-    .live-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: #fee2e2;
-      color: #991b1b;
-      padding: 0.3rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ef4444;
-      animation: blink 1.2s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* Podium Top 3 */
-    .podium-wrap {
+    .hof-item {
       display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 1.25rem;
-      margin: 2rem 0 2.5rem;
-      padding-bottom: 1rem;
-    }
-
-    .podium-col {
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      width: 150px;
-      text-align: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    .podium-avatar {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
+    .hof-item:last-child { border-bottom: none; }
+
+    .hof-rank-medal {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1.1rem;
-      color: #fff;
-      margin-bottom: 0.5rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      font-size: 0.9rem;
+      flex-shrink: 0;
     }
 
-    .podium-name {
+    .medal-1 { background: #eab308; color: #78350f; }
+    .medal-2 { background: #94a3b8; color: #1e293b; }
+    .medal-3 { background: #d97706; color: #fff; }
+
+    .hof-info { flex: 1; overflow: hidden; }
+    .hof-name {
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 140px;
     }
-
-    .podium-score {
+    .hof-score {
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 800;
       font-size: 1.15rem;
-      color: var(--primary);
-      margin: 0.2rem 0;
-    }
-
-    .podium-block {
-      width: 100%;
-      border-radius: 12px 12px 0 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-weight: 800;
-      font-size: 1.5rem;
-      color: #fff;
-      box-shadow: inset 0 2px 4px rgba(255,255,255,0.4);
+      color: #38bdf8;
     }
 
-    .podium-1 .podium-avatar { background: #eab308; }
-    .podium-1 .podium-block { height: 120px; background: linear-gradient(180deg, #facc15, #ca8a04); }
-
-    .podium-2 .podium-avatar { background: #94a3b8; }
-    .podium-2 .podium-block { height: 90px; background: linear-gradient(180deg, #cbd5e1, #64748b); }
-
-    .podium-3 .podium-avatar { background: #d97706; }
-    .podium-3 .podium-block { height: 70px; background: linear-gradient(180deg, #fb923c, #c2410c); }
-
-    /* Ranking Table */
-    .ranking-table {
+    /* Leaderboard Main Table */
+    .lb-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1rem;
+      text-align: left;
     }
 
-    .ranking-table th {
-      padding: 0.85rem 1rem;
-      text-align: left;
-      font-size: 0.8rem;
-      font-weight: 700;
+    .lb-table th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       color: var(--text-muted);
+      padding: 0.75rem 0.85rem;
       border-bottom: 1.5px solid var(--border);
     }
 
-    .ranking-table td {
-      padding: 0.95rem 1rem;
+    .lb-table td {
+      padding: 0.85rem;
       border-bottom: 1px solid #f1f5f9;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
     }
 
-    .rank-num {
-      font-weight: 800;
-      color: #64748b;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .badge-pg-pass {
-      background: #dcfce7;
-      color: #15803d;
-      font-weight: 700;
+    .badge-status-pill {
       font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
       border-radius: 6px;
     }
+    .status-lulus { background: #dcfce7; color: #15803d; }
+    .status-gagal { background: #fee2e2; color: #b91c1c; }
 
-    .badge-pg-fail {
-      background: #fee2e2;
-      color: #b91c1c;
-      font-weight: 700;
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 6px;
-    }
-
-    /* Modal CAT Exam & Results (Layar CAT BKN) */
-    .cat-modal {
+    /* FULLSCREEN CAT EXAM MODAL */
+    .cat-modal-fullscreen {
       position: fixed;
       inset: 0;
-      background: var(--bg);
+      background: #f8fafc;
       z-index: 100;
-      overflow-y: auto;
       display: none;
       flex-direction: column;
+      overflow-y: auto;
     }
+    .cat-modal-fullscreen.active { display: flex; }
 
-    .cat-modal.open {
-      display: flex;
-    }
-
-    .cat-exam-header {
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    .cat-exam-topbar {
+      background: var(--brand-dark);
       color: #fff;
-      padding: 0.85rem 1.75rem;
+      padding: 0.85rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -671,32 +640,27 @@
       z-index: 60;
     }
 
-    .exam-timer-box {
-      background: #0f172a;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+    .exam-timer-display {
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.25);
       border-radius: 10px;
       padding: 0.4rem 1.15rem;
       font-family: 'JetBrains Mono', monospace;
       font-size: 1.35rem;
-      font-weight: 700;
-      color: #38bdf8;
+      font-weight: 800;
+      color: #2dd4bf;
     }
-
-    .exam-timer-box.danger {
+    .exam-timer-display.danger {
       color: #f87171;
       border-color: #ef4444;
       animation: pulse 1s infinite alternate;
     }
 
-    .cat-exam-body {
-      flex: 1;
+    .exam-main-grid {
       max-width: 1380px;
       margin: 1.5rem auto;
       padding: 0 1.5rem;
       width: 100%;
-    }
-
-    .exam-grid {
       display: grid;
       grid-template-columns: 1fr 340px;
       gap: 1.5rem;
@@ -704,78 +668,65 @@
     }
 
     @media (max-width: 960px) {
-      .exam-grid { grid-template-columns: 1fr; }
+      .exam-main-grid { grid-template-columns: 1fr; }
     }
 
-    .card {
-      background: #fff;
+    .exam-card {
+      background: #ffffff;
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      border-radius: 16px;
+      padding: 1.75rem;
     }
 
-    .options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin: 1.5rem 0 2rem;
-    }
-
-    .option-btn {
+    .option-row {
       display: flex;
       align-items: flex-start;
-      gap: 0.95rem;
+      gap: 0.85rem;
       padding: 0.95rem 1.15rem;
       border: 1.5px solid var(--border);
       border-radius: 12px;
-      cursor: pointer;
       background: #fff;
+      cursor: pointer;
+      margin-bottom: 0.75rem;
       transition: all 0.15s;
       user-select: none;
     }
-
-    .option-btn:hover {
-      background: #f8fafc;
-      border-color: #94a3b8;
+    .option-row:hover { background: #f8fafc; border-color: #94a3b8; }
+    .option-row.selected {
+      background: #f0fdfa;
+      border-color: var(--brand-teal);
+      box-shadow: 0 0 0 1px var(--brand-teal);
     }
 
-    .option-btn.selected {
-      border-color: var(--primary);
-      background: #eff6ff;
-      box-shadow: 0 0 0 1px var(--primary);
-    }
-
-    .option-circle {
-      width: 30px;
-      height: 30px;
+    .option-char {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       border: 1.5px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 0.85rem;
       background: #fff;
       flex-shrink: 0;
     }
-
-    .option-btn.selected .option-circle {
-      background: var(--primary);
+    .option-row.selected .option-char {
+      background: var(--brand-teal);
       color: #fff;
-      border-color: var(--primary);
+      border-color: var(--brand-teal);
     }
 
-    .num-palette-grid {
+    .palette-box-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 0.45rem;
-      max-height: 380px;
+      max-height: 400px;
       overflow-y: auto;
       padding-right: 0.35rem;
     }
 
-    .num-btn {
+    .palette-btn {
       aspect-ratio: 1;
       display: flex;
       align-items: center;
@@ -788,611 +739,515 @@
       cursor: pointer;
       transition: all 0.15s;
     }
+    .palette-btn.answered { background: var(--success); color: #fff; border-color: var(--success); }
+    .palette-btn.doubt { background: var(--accent-gold); color: #78350f; border-color: var(--accent-gold); }
+    .palette-btn.active { box-shadow: 0 0 0 2px var(--brand-dark); font-weight: 800; }
 
-    .num-btn.answered { background: var(--success); color: #fff; border-color: var(--success); }
-    .num-btn.doubt { background: var(--warning); color: #78350f; border-color: var(--warning); }
-    .num-btn.active { box-shadow: 0 0 0 2px #0f172a; font-weight: 800; }
-
-    /* Results & Explanations */
-    .result-container {
+    /* POST-EXAM EVALUATION STUDIO (Layar Pembahasan) */
+    .review-studio-container {
       max-width: 1040px;
       margin: 0 auto;
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 1.5rem;
     }
 
-    .status-banner {
+    .eval-banner {
       padding: 1.75rem;
-      border-radius: 14px;
+      border-radius: 16px;
       margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: #fff;
     }
+    .eval-banner.passed { background: linear-gradient(135deg, #059669, #10b981); }
+    .eval-banner.failed { background: linear-gradient(135deg, #e11d48, #f43f5e); }
 
-    .status-banner.passed { background: linear-gradient(135deg, #15803d, #16a34a); }
-    .status-banner.failed { background: linear-gradient(135deg, #b91c1c, #dc2626); }
-
-    .score-cards-grid {
+    .score-breakdown-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
       margin-bottom: 2rem;
     }
+    @media (max-width: 768px) {
+      .score-breakdown-row { grid-template-columns: repeat(2, 1fr); }
+    }
 
-    .score-card {
+    .eval-score-card {
       background: #fff;
       padding: 1.25rem;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid var(--border);
       text-align: center;
     }
-
-    .score-val {
+    .eval-score-num {
       font-size: 2.2rem;
       font-weight: 800;
       font-family: 'JetBrains Mono', monospace;
-      color: var(--primary-dark);
-      margin: 0.35rem 0;
+      color: var(--brand-dark);
+      margin: 0.25rem 0;
     }
 
-    .explanation-card {
-      background: #fff;
-      border: 1.5px solid var(--border);
-      border-radius: 14px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .explanation-card.correct { border-left: 6px solid var(--success); }
-    .explanation-card.incorrect { border-left: 6px solid var(--danger); }
-    .explanation-card.tkp { border-left: 6px solid var(--primary); }
-
-    .sol-box {
+    .step-solution-box {
       background: #f8fafc;
       border: 1px dashed #cbd5e1;
-      border-radius: 10px;
-      padding: 1.15rem;
+      border-radius: 12px;
+      padding: 1.25rem;
       margin-top: 1rem;
       font-size: 0.925rem;
       white-space: pre-line;
       line-height: 1.65;
     }
 
-    .footer {
-      background: #0f172a;
+    .site-footer {
+      background: var(--brand-dark);
       color: #94a3b8;
       padding: 3rem 1.5rem 2rem;
-      margin-top: 4rem;
-      font-size: 0.875rem;
+      margin-top: 5rem;
+      font-size: 0.85rem;
       text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
   </style>
 </head>
 <body>
 
-  <!-- Sticky Top Navigation -->
-  <header class="site-nav">
-    <div class="brand-group" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-      <div class="brand-icon">🎯</div>
-      <div class="brand-name">oneshot<span>ASN</span></div>
+  <!-- Top Announcement Strip -->
+  <div class="top-stat-strip">
+    <div class="stat-items-group">
+      <span class="stat-pill">📚 Bank Soal Aktif: <strong>5.000+ Butir</strong></span>
+      <span class="stat-pill">👥 Peserta Simulasi: <strong>1.480 Pejuang NIP</strong></span>
+      <span class="stat-pill">🎯 Standar Regulasi: <strong>PermenPAN-RB SKD CPNS</strong></span>
+    </div>
+    <div>
+      <span>Status Server: <strong style="color:#2dd4bf">Normal & Siap Ujian</strong></span>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="app-nav">
+    <div class="brand-logo-area" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+      <div class="brand-emblem">GC</div>
+      <div class="brand-title-wrap">
+        <h1>GARUDA CAT</h1>
+        <span>SKD SIMULATOR CPNS</span>
+      </div>
     </div>
 
-    <ul class="nav-links">
-      <li><a class="nav-link active" href="#tryout">Paket Tryout</a></li>
-      <li><a class="nav-link" href="#passing-grade">Passing Grade</a></li>
-      <li><a class="nav-link" href="#ranking">🏆 Live Ranking</a></li>
-      <li><a class="nav-link" href="#about">Tentang CAT</a></li>
+    <ul class="nav-menu">
+      <li><a href="#matrix" class="nav-item-link">Pilihan Paket</a></li>
+      <li><a href="#meters" class="nav-item-link">Target Passing Grade</a></li>
+      <li><a href="#leaderboard" class="nav-item-link">Papan Peringkat Live</a></li>
     </ul>
 
-    <div class="nav-cta">
-      <button class="btn btn-primary" onclick="openStartModal('sim100')">Mulai Tryout 100 Soal »</button>
+    <div>
+      <button class="btn btn-teal" onclick="triggerQuickLaunch('sim100')">Mulai 100 Soal Acak »</button>
     </div>
   </header>
 
-  <!-- Hero Section (ala oneshotasn) -->
-  <section class="hero-section">
-    <div class="hero-container">
-      <div>
-        <div class="hero-script-tag">Siap lolos NIP? Mulai di sini!</div>
-        <h1 class="hero-headline">Sekali tembak,<br>lolos jadi ASN.</h1>
-        <p class="hero-sub">
-          Platform simulasi ujian CAT CPNS terlengkap dengan bank soal ribuan butir teracak, timer standar BKN, ranking nasional live, dan <strong>penyelesaian soal langkah demi langkah</strong>.
+  <!-- COMMAND CENTER HERO: Interactive Practice Launcher -->
+  <section class="command-hub">
+    <div class="hub-container">
+      <div class="hub-header">
+        <div class="hub-badge">🚀 SISTEM COMPUTER ASSISTED TEST RESMI</div>
+        <h2 class="hub-title">Kuasai Soal Ujian CPNS dengan <span>Simulasi Terstandar</span></h2>
+        <p class="hub-desc">
+          Latihan ujian berbasis CAT dengan ribuan bank soal acak berimbang, timer server otoritatif, perhitungan passing grade akurat, serta <strong>penyelesaian soal langkah demi langkah</strong>.
         </p>
-
-        <div class="hero-buttons">
-          <a href="#tryout" class="btn hero-btn-white">Lihat Paket Tryout ↓</a>
-          <button class="btn hero-btn-outline" onclick="openStartModal('sim100')">⚡ Simulasi 100 Soal Acak</button>
-        </div>
       </div>
 
-      <!-- Quick Category Jump Cards -->
-      <div class="hero-cards-box">
-        <div class="glass-card" onclick="openStartModal('sim100')">
-          <div>
-            <div class="glass-title">Simulasi 100 Soal Acak (Rekomendasi)</div>
-            <div class="glass-sub">TWK 27 · TIU 32 · TKP 41 · 90 Menit</div>
-          </div>
-          <div class="glass-arrow">→</div>
+      <!-- Quick Launch Dock (Tata Letak Input Praktis) -->
+      <div class="quick-launch-dock">
+        <div class="dock-field">
+          <label for="inputUserName">Nama Peserta</label>
+          <input type="text" id="inputUserName" class="dock-input" placeholder="Masukkan nama Anda..." value="Pejuang NIP 2026">
         </div>
 
-        <div class="glass-card" onclick="openStartModal('skd110')">
-          <div>
-            <div class="glass-title">Simulasi SKD Resmi 110 Soal</div>
-            <div class="glass-sub">Format Asli CAT BKN · 100 Menit</div>
-          </div>
-          <div class="glass-arrow">→</div>
+        <div class="dock-field">
+          <label for="selectModeHub">Pilihan Paket Ujian</label>
+          <select id="selectModeHub" class="dock-select">
+            <option value="sim100" selected>⚡ Simulasi 100 Soal Acak (TWK 27 · TIU 32 · TKP 41) - 90 Menit</option>
+            <option value="skd110">🏛 Gladi Bersih SKD Resmi (110 Soal Lengkap) - 100 Menit</option>
+            <option value="tiu25">🔢 TIU Masterclass (Deret, Aritmetika & Silogisme) - 35 Menit</option>
+            <option value="twk25">🇮🇩 Drilling TWK (Pilar Negara & Integritas) - 25 Menit</option>
+            <option value="tkp25">🤝 Drilling TKP (Skala 1 s/d 5) - 25 Menit</option>
+            <option value="mini20">⏱ Mini Test 20 Soal Kilat - 20 Menit</option>
+          </select>
         </div>
 
-        <div class="glass-card" onclick="openStartModal('tiu25')">
-          <div>
-            <div class="glass-title">Latihan Spesialis TIU (Numerik & Silogisme)</div>
-            <div class="glass-sub">25 Soal Rumus & Trik Cepat · 35 Menit</div>
-          </div>
-          <div class="glass-arrow">→</div>
-        </div>
-
-        <div class="glass-card" onclick="location.href='#ranking'">
-          <div>
-            <div class="glass-title">🏆 Papan Peringkat Live Nasional</div>
-            <div class="glass-sub">Lihat skor & status kelulusan peserta lain</div>
-          </div>
-          <div class="glass-arrow">→</div>
+        <div>
+          <button class="btn btn-teal" style="padding: 0.85rem 1.6rem; font-size: 1rem;" onclick="startFromDock()">
+            Mulai Ujian Sekarang »
+          </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Main Content Area -->
-  <main class="content-wrap">
+  <!-- MAIN BODY -->
+  <main class="page-wrap">
 
-    <!-- 1. SECTION: Paket Tryout (Filterable Grid) -->
-    <section id="tryout" style="scroll-margin-top: 5rem;">
-      <div class="section-header">
+    <!-- SECTION 1: TARGET PASSING GRADE METERS -->
+    <section id="meters" class="meter-section">
+      <div class="section-headline">
         <div>
-          <h2 class="section-title">Pilihan Paket Tryout & Simulasi</h2>
-          <p class="section-sub">Bank soal terstandar MenPAN-RB & BKN. Soal diacak otomatis setiap sesi ujian dimulai.</p>
-        </div>
-
-        <div class="filter-pills">
-          <button class="pill-btn active" onclick="filterPackages('all', this)">Semua</button>
-          <button class="pill-btn" onclick="filterPackages('skd', this)">SKD Lengkap</button>
-          <button class="pill-btn" onclick="filterPackages('subtest', this)">Fokus Subtes</button>
+          <h3 class="headline-title">Target Nilai Ambang Batas (Passing Grade)</h3>
+          <p class="headline-sub">Standar kelulusan mutlak SKD CPNS. Peserta harus melampaui ketiga subtes secara bersamaan.</p>
         </div>
       </div>
 
-      <div class="packages-grid" id="packagesGrid">
+      <div class="target-meters-grid">
+        <!-- TWK Meter -->
+        <div class="meter-card meter-twk">
+          <div class="meter-top">
+            <span class="meter-code">TWK (Wawasan Kebangsaan)</span>
+            <span class="meter-badge">Benar +5 · Salah 0</span>
+          </div>
+          <div class="meter-numbers">
+            <span class="meter-target-val">65</span>
+            <span class="meter-max-val">/ 150 Poin Maksimal</span>
+          </div>
+          <div class="meter-bar-track">
+            <div class="meter-bar-fill"></div>
+          </div>
+          <p class="meter-rule-note">Target minimal 13 butir soal benar. Menguji Nasionalisme, Bela Negara, Pilar Kebangsaan, Integritas, dan Bahasa Indonesia.</p>
+        </div>
+
+        <!-- TIU Meter -->
+        <div class="meter-card meter-tiu">
+          <div class="meter-top">
+            <span class="meter-code">TIU (Intelegensia Umum)</span>
+            <span class="meter-badge">Benar +5 · Salah 0</span>
+          </div>
+          <div class="meter-numbers">
+            <span class="meter-target-val">80</span>
+            <span class="meter-max-val">/ 175 Poin Maksimal</span>
+          </div>
+          <div class="meter-bar-track">
+            <div class="meter-bar-fill"></div>
+          </div>
+          <p class="meter-rule-note">Target minimal 16 butir soal benar. Menguji Deret Aritmetika/Geometri, Soal Cerita Aljabar, Analogi Kata, dan Silogisme Logis.</p>
+        </div>
+
+        <!-- TKP Meter -->
+        <div class="meter-card meter-tkp">
+          <div class="meter-top">
+            <span class="meter-code">TKP (Karakteristik Pribadi)</span>
+            <span class="meter-badge">Skala Bobot 1-5</span>
+          </div>
+          <div class="meter-numbers">
+            <span class="meter-target-val">156</span>
+            <span class="meter-max-val">/ 225 Poin Maksimal</span>
+          </div>
+          <div class="meter-bar-track">
+            <div class="meter-bar-fill"></div>
+          </div>
+          <p class="meter-rule-note">Target rata-rata minimal 3.47 poin per soal. Tidak ada nilai 0 atau minus; utamakan respon yang mencerminkan core values BerAKHLAK.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PAKET SIMULASI MATRIX (Tata Letak List Horizontal) -->
+    <section id="matrix" class="packages-matrix">
+      <div class="section-headline">
+        <div>
+          <h3 class="headline-title">Daftar Paket Simulasi Ujian</h3>
+          <p class="headline-sub">Pilih paket latihan yang sesuai dengan target dan waktu belajar Anda.</p>
+        </div>
+      </div>
+
+      <div class="matrix-list">
         <!-- Paket 1: 100 Soal Acak -->
-        <div class="pkg-card" data-cat="skd">
+        <div class="matrix-item featured">
           <div>
-            <span class="pkg-badge badge-bundling">Paling Populer ⭐</span>
-            <h3 class="pkg-title">Simulasi CAT CPNS (100 Soal)</h3>
-            <p class="pkg-desc">Pilihan latihan paling efisien. Menampilkan tepat 100 butir soal acak berimbang dengan skor dinormalkan ke skala SKD.</p>
-
-            <div class="pkg-chips">
-              <span class="pkg-chip">100 Soal</span>
-              <span class="pkg-chip">90 Menit</span>
-              <span class="pkg-chip">TWK 27</span>
-              <span class="pkg-chip">TIU 32</span>
-              <span class="pkg-chip">TKP 41</span>
+            <div class="matrix-title">
+              Simulasi 100 Soal Acak
+              <span style="font-size: 0.75rem; background: var(--brand-teal); color:#fff; padding:0.15rem 0.5rem; border-radius:4px;">Rekomendasi</span>
             </div>
+            <p class="matrix-desc">Pengacakan 100 butir soal berimbang dari ribuan database. Nilai akhir dinormalkan langsung ke skala SKD resmi 110.</p>
           </div>
 
-          <div class="pkg-bottom">
-            <div>
-              <div class="pkg-price-free">GRATIS</div>
-              <div class="pkg-price-sub">Akses Lengkap + Solusi</div>
-            </div>
-            <button class="btn btn-primary" onclick="openStartModal('sim100')">Mulai Tryout »</button>
+          <div class="matrix-specs">
+            <div class="spec-row"><span class="spec-icon">✓</span> 100 Butir Soal (TWK 27 · TIU 32 · TKP 41)</div>
+            <div class="spec-row"><span class="spec-icon">⏱</span> Waktu Pengerjaan: 90 Menit</div>
+          </div>
+
+          <div>
+            <span class="matrix-difficulty-badge diff-adaptive">Stratifikasi Kesulitan</span>
+          </div>
+
+          <div>
+            <button class="btn btn-teal" onclick="triggerQuickLaunch('sim100')">Mulai Simulasi »</button>
           </div>
         </div>
 
-        <!-- Paket 2: 110 Soal Resmi BKN -->
-        <div class="pkg-card" data-cat="skd">
+        <!-- Paket 2: 110 Soal Resmi SKD BKN -->
+        <div class="matrix-item">
           <div>
-            <span class="pkg-badge badge-skd">Format Resmi BKN</span>
-            <h3 class="pkg-title">Gladi Bersih SKD Resmi (110 Soal)</h3>
-            <p class="pkg-desc">Simulasi yang persis dengan hari H tes CAT BKN. Durasi 100 menit penuh dengan batas passing grade mutlak.</p>
-
-            <div class="pkg-chips">
-              <span class="pkg-chip">110 Soal</span>
-              <span class="pkg-chip">100 Menit</span>
-              <span class="pkg-chip">TWK 30</span>
-              <span class="pkg-chip">TIU 35</span>
-              <span class="pkg-chip">TKP 45</span>
-            </div>
+            <div class="matrix-title">Gladi Bersih SKD Resmi (110 Soal)</div>
+            <p class="matrix-desc">Format paling mendekati hari H seleksi CPNS. Menampilkan 110 soal penuh dengan durasi 100 menit.</p>
           </div>
 
-          <div class="pkg-bottom">
-            <div>
-              <div class="pkg-price-free">GRATIS</div>
-              <div class="pkg-price-sub">Timer Otoritatif</div>
-            </div>
-            <button class="btn btn-outline" onclick="openStartModal('skd110')">Mulai Tryout »</button>
+          <div class="matrix-specs">
+            <div class="spec-row"><span class="spec-icon">✓</span> 110 Butir Soal (TWK 30 · TIU 35 · TKP 45)</div>
+            <div class="spec-row"><span class="spec-icon">⏱</span> Waktu Pengerjaan: 100 Menit</div>
+          </div>
+
+          <div>
+            <span class="matrix-difficulty-badge diff-official">Standar Penuh BKN</span>
+          </div>
+
+          <div>
+            <button class="btn btn-outline" onclick="triggerQuickLaunch('skd110')">Mulai Ujian »</button>
           </div>
         </div>
 
-        <!-- Paket 3: TIU Spesialis -->
-        <div class="pkg-card" data-cat="subtest">
+        <!-- Paket 3: TIU Masterclass -->
+        <div class="matrix-item">
           <div>
-            <span class="pkg-badge badge-subtest">Subtes Tersulit</span>
-            <h3 class="pkg-title">TIU Masterclass (25 Soal)</h3>
-            <p class="pkg-desc">Fokus mengasah kecepatan deret bertingkat, aritmetika pecahan, perbandingan, kecepatan harmonik, dan silogisme logis.</p>
-
-            <div class="pkg-chips">
-              <span class="pkg-chip">25 Soal</span>
-              <span class="pkg-chip">35 Menit</span>
-              <span class="pkg-chip">Numerik</span>
-              <span class="pkg-chip">Verbal</span>
-              <span class="pkg-chip">Penalaran</span>
-            </div>
+            <div class="matrix-title">TIU Masterclass (Numerik & Penalaran)</div>
+            <p class="matrix-desc">Fokus mendalam pada subtes tersulit. Latihan deret angka bertingkat, pecahan desimal, soal cerita kecepatan, dan logika silogisme.</p>
           </div>
 
-          <div class="pkg-bottom">
-            <div>
-              <div class="pkg-price-free">GRATIS</div>
-              <div class="pkg-price-sub">Langkah Demi Langkah</div>
-            </div>
-            <button class="btn btn-outline" onclick="openStartModal('tiu25')">Latihan TIU »</button>
+          <div class="matrix-specs">
+            <div class="spec-row"><span class="spec-icon">✓</span> 25 Butir Soal Parametrik</div>
+            <div class="spec-row"><span class="spec-icon">⏱</span> Waktu Pengerjaan: 35 Menit</div>
+          </div>
+
+          <div>
+            <span class="matrix-difficulty-badge diff-drill">Fokus Numerik</span>
+          </div>
+
+          <div>
+            <button class="btn btn-outline" onclick="triggerQuickLaunch('tiu25')">Latihan TIU »</button>
           </div>
         </div>
 
-        <!-- Paket 4: TWK Spesialis -->
-        <div class="pkg-card" data-cat="subtest">
+        <!-- Paket 4: TWK & TKP Drilling -->
+        <div class="matrix-item">
           <div>
-            <span class="pkg-badge badge-subtest">Subtes Kebangsaan</span>
-            <h3 class="pkg-title">Drilling Soal TWK (25 Soal)</h3>
-            <p class="pkg-desc">Pilar Negara, Nasionalisme, Bela Negara, Integritas, Bahasa Indonesia baku, dan wawasan sejarah pergerakan bangsa.</p>
-
-            <div class="pkg-chips">
-              <span class="pkg-chip">25 Soal</span>
-              <span class="pkg-chip">25 Menit</span>
-              <span class="pkg-chip">Pancasila</span>
-              <span class="pkg-chip">UUD 1945</span>
-              <span class="pkg-chip">Integritas</span>
-            </div>
+            <div class="matrix-title">Drilling Subtes Spesifik (TWK / TKP)</div>
+            <p class="matrix-desc">Pertajam penguasaan materi kebangsaan (Pilar Negara, UU ASN, Integritas) atau strategi membidik poin 5 pada TKP.</p>
           </div>
 
-          <div class="pkg-bottom">
-            <div>
-              <div class="pkg-price-free">GRATIS</div>
-              <div class="pkg-price-sub">Kupas Tuntas Pasal</div>
-            </div>
-            <button class="btn btn-outline" onclick="openStartModal('twk25')">Latihan TWK »</button>
+          <div class="matrix-specs">
+            <div class="spec-row"><span class="spec-icon">✓</span> 25 Butir Soal per Sesi</div>
+            <div class="spec-row"><span class="spec-icon">⏱</span> Waktu Pengerjaan: 25 Menit</div>
           </div>
-        </div>
 
-        <!-- Paket 5: TKP Spesialis -->
-        <div class="pkg-card" data-cat="subtest">
           <div>
-            <span class="pkg-badge badge-subtest">Subtes Karakteristik</span>
-            <h3 class="pkg-title">Drilling Soal TKP (25 Soal)</h3>
-            <p class="pkg-desc">Latihan strategi membidik jawaban dengan poin tertinggi (5 poin) sesuai prinsip BerAKHLAK dan profesionalisme ASN.</p>
-
-            <div class="pkg-chips">
-              <span class="pkg-chip">25 Soal</span>
-              <span class="pkg-chip">25 Menit</span>
-              <span class="pkg-chip">Pelayanan</span>
-              <span class="pkg-chip">Jejaring</span>
-              <span class="pkg-chip">Skala 1-5</span>
-            </div>
+            <span class="matrix-difficulty-badge diff-drill">Penguatan Konsep</span>
           </div>
 
-          <div class="pkg-bottom">
-            <div>
-              <div class="pkg-price-free">GRATIS</div>
-              <div class="pkg-price-sub">Analisis Bobot Poin</div>
-            </div>
-            <button class="btn btn-outline" onclick="openStartModal('tkp25')">Latihan TKP »</button>
-          </div>
-        </div>
-
-        <!-- Paket 6: Mini Test -->
-        <div class="pkg-card" data-cat="skd">
-          <div>
-            <span class="pkg-badge badge-skd">Cepat & Ringkas</span>
-            <h3 class="pkg-title">Mini Test Campuran (20 Soal)</h3>
-            <p class="pkg-desc">Latihan cepat 20 menit saat istirahat kerja untuk menjaga ritme pengerjaan soal dan ketajaman berpikir analitis.</p>
-
-            <div class="pkg-chips">
-              <span class="pkg-chip">20 Soal</span>
-              <span class="pkg-chip">20 Menit</span>
-              <span class="pkg-chip">TWK 7</span>
-              <span class="pkg-chip">TIU 7</span>
-              <span class="pkg-chip">TKP 6</span>
-            </div>
-          </div>
-
-          <div class="pkg-bottom">
-            <div>
-              <div class="pkg-price-free">GRATIS</div>
-              <div class="pkg-price-sub">Kilat 20 Menit</div>
-            </div>
-            <button class="btn btn-outline" onclick="openStartModal('mini20')">Mulai Mini Test »</button>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-outline" onclick="triggerQuickLaunch('twk25')">TWK »</button>
+            <button class="btn btn-outline" onclick="triggerQuickLaunch('tkp25')">TKP »</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. SECTION: Komposisi & Passing Grade Resmi -->
-    <section id="passing-grade" style="scroll-margin-top: 5rem; margin-top: 4.5rem;">
-      <div class="section-header">
+    <!-- SECTION 3: LIVE LEADERBOARD (HALL OF FAME & TABLE STRIP) -->
+    <section id="leaderboard" class="leaderboard-container">
+      <div class="section-headline">
         <div>
-          <h2 class="section-title">Komposisi & Nilai Ambang Batas (Passing Grade)</h2>
-          <p class="section-sub">Aturan resmi SKD: Peserta <strong>wajib memenuhi ketiga passing grade</strong> untuk dinyatakan lolos.</p>
-        </div>
-      </div>
-
-      <div class="pg-table-card">
-        <table class="pg-table">
-          <thead>
-            <tr>
-              <th>Subtes</th>
-              <th>Jumlah Soal (Standar)</th>
-              <th>Sistem Penilaian</th>
-              <th>Nilai Maksimal</th>
-              <th>Passing Grade (Ambang Batas)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>TWK (Tes Wawasan Kebangsaan)</strong></td>
-              <td>30 Butir (27 pd mode 100)</td>
-              <td>Benar +5, Salah/Kosong 0</td>
-              <td>150</td>
-              <td><span class="badge-pg-pass" style="font-size: 0.9rem;">≥ 65 Poin</span></td>
-            </tr>
-            <tr>
-              <td><strong>TIU (Tes Intelegensia Umum)</strong></td>
-              <td>35 Butir (32 pd mode 100)</td>
-              <td>Benar +5, Salah/Kosong 0</td>
-              <td>175</td>
-              <td><span class="badge-pg-pass" style="font-size: 0.9rem;">≥ 80 Poin</span></td>
-            </tr>
-            <tr>
-              <td><strong>TKP (Tes Karakteristik Pribadi)</strong></td>
-              <td>45 Butir (41 pd mode 100)</td>
-              <td>Skala Bobot 1 s/d 5</td>
-              <td>225</td>
-              <td><span class="badge-pg-pass" style="font-size: 0.9rem;">≥ 156 Poin</span></td>
-            </tr>
-            <tr style="background: #f8fafc; font-weight: 800;">
-              <td>TOTAL KOMULATIF</td>
-              <td>110 Butir (100 Menit)</td>
-              <td>TWK + TIU + TKP</td>
-              <td>550 Poin</td>
-              <td>Wajib Lolos Ketiganya</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- 3. SECTION: Live Leaderboard / Ranking Nasional (ala oneshotasn) -->
-    <section id="ranking" style="scroll-margin-top: 5rem;" class="ranking-section">
-      <div class="ranking-top">
-        <div>
-          <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.35rem;">
-            <h2 class="section-title" style="font-size: 1.65rem;">Papan Peringkat (Live Ranking)</h2>
-            <div class="live-badge"><div class="live-dot"></div> LIVE</div>
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <h3 class="headline-title">Papan Peringkat Nasional (Live Leaderboard)</h3>
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
           </div>
-          <p class="section-sub">Aturan Fair-play: Peringkat otomatis diperbarui setiap kali peserta menyelesaikan ujian simulasi.</p>
+          <p class="headline-sub">Peringkat langsung terbarui setiap kali ada peserta yang menyelesaikan simulasi ujian.</p>
         </div>
 
-        <button class="btn btn-outline" onclick="loadLeaderboard()">🔄 Muat Ulang Peringkat</button>
+        <button class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;" onclick="fetchLeaderboard()">
+          🔄 Sinkronkan Data
+        </button>
       </div>
 
-      <!-- Podium Top 3 -->
-      <div class="podium-wrap" id="podiumArea">
-        <!-- Rendered by JS -->
-      </div>
+      <div class="ranking-hall-grid">
+        <!-- Hall of Fame Top 3 List -->
+        <div class="hall-of-fame-top3">
+          <div class="hof-title">
+            <span>🏆 TOP 3 NASIONAL</span>
+            <span style="font-size: 0.75rem; color:#94a3b8; font-weight: normal;">Percobaan Pertama</span>
+          </div>
+          <div id="hofList">
+            <!-- Injected by JS -->
+          </div>
+        </div>
 
-      <!-- Ranking Table -->
-      <table class="ranking-table">
-        <thead>
-          <tr>
-            <th style="width: 50px;">#</th>
-            <th>Nama Peserta</th>
-            <th>Paket</th>
-            <th>Skor per Bagian (TWK · TIU · TKP)</th>
-            <th>Total Skor</th>
-            <th>Status Kelulusan</th>
-            <th>Waktu</th>
-          </tr>
-        </thead>
-        <tbody id="rankingTableBody">
-          <!-- Rendered by JS -->
-        </tbody>
-      </table>
+        <!-- Main Leaderboard Table -->
+        <div style="overflow-x: auto;">
+          <table class="lb-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Peserta</th>
+                <th>Subtes (TWK · TIU · TKP)</th>
+                <th>Skor Akhir</th>
+                <th>Status</th>
+                <th>Waktu</th>
+              </tr>
+            </thead>
+            <tbody id="lbTableBody">
+              <!-- Injected by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
   </main>
 
-  <!-- MODAL: Dialog Mulai Ujian -->
-  <div id="startModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; align-items: center; justify-content: center; padding: 1.5rem;">
-    <div style="background: #fff; width: 100%; max-width: 520px; border-radius: 16px; padding: 2rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);">
-      <h3 style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-bottom: 0.4rem;">Konfirmasi Peserta Ujian</h3>
-      <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">Masukkan identitas Anda untuk mencatat skor dan peringkat pengerjaan.</p>
-
-      <form id="modalStartForm">
-        <input type="hidden" id="modalSelectedMode" value="sim100">
-
-        <div style="margin-bottom: 1.25rem;">
-          <label style="display: block; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.35rem;">Nama Lengkap</label>
-          <input type="text" id="modalUserName" required placeholder="Contoh: Budi Santoso" style="width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.95rem;" value="Pejuang NIP 2026">
-        </div>
-
-        <div style="margin-bottom: 1.5rem; background: #eff6ff; padding: 1rem; border-radius: 10px; border-left: 4px solid var(--primary); font-size: 0.85rem; color: #1e40af;">
-          <strong>Ketentuan Ujian:</strong>
-          <div id="modalModeInfo" style="margin-top: 0.35rem;">100 Soal · 90 Menit · Acak Dinamis</div>
-        </div>
-
-        <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
-          <button type="button" class="btn btn-outline" onclick="closeStartModal()">Batal</button>
-          <button type="submit" class="btn btn-primary">Mulai Ujian Sekarang »</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- FULLSCREEN MODAL: CAT Exam Runner Interface -->
-  <div id="catExamModal" class="cat-modal">
-    <!-- Exam Header -->
-    <div class="cat-exam-header">
-      <div style="display: flex; align-items: center; gap: 1rem;">
-        <div style="font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em;">CAT BKN SIMULATOR</div>
-        <div style="opacity: 0.6; font-size: 0.85rem;">|</div>
-        <div id="examParticipantInfo" style="font-size: 0.875rem;">Peserta: <strong>Budi</strong> (CPNS-2026)</div>
+  <!-- FULLSCREEN CAT RUNNER (Antarmuka Simulasi CAT BKN) -->
+  <div id="catExamModal" class="cat-modal-fullscreen">
+    <div class="cat-exam-topbar">
+      <div style="display: flex; align-items: center; gap: 0.85rem;">
+        <strong style="letter-spacing: -0.01em;">GARUDA CAT SIMULATOR</strong>
+        <span style="opacity: 0.4;">|</span>
+        <span id="catExamUserInfo" style="font-size: 0.875rem;">Peserta: <strong>-</strong></span>
       </div>
 
-      <div style="display: flex; align-items: center; gap: 1.25rem;">
-        <div class="exam-timer-box" id="examTimerBox">⏱ <span id="examTimerDisplay">00:00:00</span></div>
+      <div class="exam-timer-display" id="catTimerBox">
+        ⏱ <span id="catTimerText">00:00:00</span>
       </div>
     </div>
 
-    <!-- Exam Content -->
-    <div class="cat-exam-body">
-      <div class="exam-grid">
-        <!-- Left: Question & Options -->
-        <div class="card">
-          <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.85rem; margin-bottom: 1.25rem;">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-              <span id="qBadgeNum" style="font-size: 1.15rem; font-weight: 800; color: #0f172a;">Soal No. 1</span>
-              <span id="qBadgeSubtest" style="font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 9999px; background: #e0e7ff; color: #3730a3;">TWK</span>
-              <span id="qBadgeCat" style="font-size: 0.825rem; color: #64748b;">Pilar Negara</span>
-            </div>
-            <div id="qDoubtIndicator" style="display: none; font-size: 0.75rem; font-weight: 700; color: #b45309; background: #fef3c7; padding: 0.2rem 0.6rem; border-radius: 6px;">RAGU-RAGU</div>
+    <div class="exam-main-grid">
+      <!-- Left: Soal & Opsi -->
+      <div class="exam-card">
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid var(--border); padding-bottom: 0.85rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <strong id="catQNum" style="font-size: 1.2rem; color: var(--brand-dark);">Soal No. 1</strong>
+            <span id="catQSubtest" style="font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.65rem; border-radius: 9999px; background: #ccfbf1; color: #0f766e;">TWK</span>
+            <span id="catQCat" style="font-size: 0.825rem; color: var(--text-muted);">Pilar Negara</span>
           </div>
-
-          <div id="qBodyText" style="font-size: 1.05rem; line-height: 1.65; margin-bottom: 1.75rem; white-space: pre-line;">Memuat soal...</div>
-
-          <div class="options-list" id="qOptionsList"></div>
-
-          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
-            <div style="display: flex; gap: 0.5rem;">
-              <button id="btnPrev" class="btn btn-outline">« Sebelumnya</button>
-              <button id="btnDoubt" class="btn btn-amber">Ragu-Ragu</button>
-            </div>
-            <div style="display: flex; gap: 0.5rem;">
-              <button id="btnNext" class="btn btn-primary">Simpan & Lanjut »</button>
-              <button id="btnFinish" class="btn btn-danger" style="margin-left: 0.5rem;">Selesai Ujian</button>
-            </div>
-          </div>
+          <div id="catQDoubtTag" style="display: none; font-size: 0.75rem; font-weight: 700; color: #78350f; background: #fef3c7; padding: 0.2rem 0.6rem; border-radius: 6px;">RAGU-RAGU</div>
         </div>
 
-        <!-- Right: Question Number Grid Palette -->
-        <div class="card">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem;">
-            <span style="font-weight: 700; font-size: 0.95rem;">Navigasi Soal</span>
-            <span id="paletteCounter" style="font-size: 0.8rem; color: var(--text-muted);">0 / 100</span>
-          </div>
+        <div id="catQBody" style="font-size: 1.05rem; line-height: 1.65; margin-bottom: 1.75rem; white-space: pre-line;">Memuat soal ujian...</div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; font-size: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1rem;">
-            <div><span style="display:inline-block; width:10px; height:10px; background:var(--success); border-radius:2px;"></span> Dijawab</div>
-            <div><span style="display:inline-block; width:10px; height:10px; background:var(--warning); border-radius:2px;"></span> Ragu-ragu</div>
-            <div><span style="display:inline-block; width:10px; height:10px; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:2px;"></span> Belum</div>
-            <div><span style="display:inline-block; width:10px; height:10px; border:2px solid #0f172a; border-radius:2px;"></span> Aktif</div>
-          </div>
+        <div id="catQOptionsArea"></div>
 
-          <div class="num-palette-grid" id="numberPaletteGrid"></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1.5px solid var(--border); padding-top: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="btnCatPrev" class="btn btn-outline">« Soal Sebelumnya</button>
+            <button id="btnCatDoubt" class="btn btn-amber">Tandai Ragu-Ragu</button>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="btnCatNext" class="btn btn-teal">Simpan & Lanjut »</button>
+            <button id="btnCatFinish" class="btn" style="background: var(--danger); color: #fff; margin-left: 0.5rem;">Selesai Ujian</button>
+          </div>
         </div>
+      </div>
+
+      <!-- Right: Kotak Navigasi Nomor -->
+      <div class="exam-card">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem;">
+          <strong style="font-size: 0.95rem;">Navigasi Nomor Soal</strong>
+          <span id="catPaletteProgress" style="font-size: 0.8rem; color: var(--text-muted);">0 / 100</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; font-size: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+          <div><span style="display:inline-block; width:10px; height:10px; background:var(--success); border-radius:2px;"></span> Terjawab</div>
+          <div><span style="display:inline-block; width:10px; height:10px; background:var(--accent-gold); border-radius:2px;"></span> Ragu-ragu</div>
+          <div><span style="display:inline-block; width:10px; height:10px; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:2px;"></span> Belum</div>
+          <div><span style="display:inline-block; width:10px; height:10px; border:2px solid var(--brand-dark); border-radius:2px;"></span> Sedang Dibuka</div>
+        </div>
+
+        <div class="palette-box-grid" id="catPaletteGrid"></div>
       </div>
     </div>
   </div>
 
-  <!-- FULLSCREEN MODAL: Result & In-Depth Solutions -->
-  <div id="catResultModal" class="cat-modal">
-    <div class="cat-exam-header">
-      <div style="font-weight: 800; font-size: 1.15rem;">HASIL SIMULASI & PEMBAHASAN LENGKAP</div>
-      <button class="btn btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.4);" onclick="closeResultModal()">✕ Tutup & Kembali ke Beranda</button>
+  <!-- FULLSCREEN POST-EXAM EVALUATION STUDIO (Layar Pembahasan Lengkap) -->
+  <div id="catResultModal" class="cat-modal-fullscreen">
+    <div class="cat-exam-topbar">
+      <strong>RAPORT HASIL & PEMBAHASAN LANGKAH DEMI LANGKAH</strong>
+      <button class="btn btn-outline" style="color:#fff; border-color:rgba(255,255,255,0.3);" onclick="closeResultStudio()">✕ Kembali ke Beranda</button>
     </div>
 
-    <div class="result-container">
-      <div id="resStatusBanner" class="status-banner passed">
+    <div class="review-studio-container">
+      <!-- Status Banner -->
+      <div id="evalStatusBanner" class="eval-banner passed">
         <div>
-          <div id="resStatusTitle" style="font-size: 1.6rem; font-weight: 800;">MEMENUHI PASSING GRADE</div>
-          <div id="resStatusSub" style="opacity: 0.9; margin-top: 0.25rem;">Nilai Anda melampaui seluruh ambang batas SKD resmi BKN.</div>
+          <div id="evalStatusTitle" style="font-size: 1.6rem; font-weight: 800;">MEMENUHI PASSING GRADE</div>
+          <div id="evalStatusSub" style="opacity: 0.9; margin-top: 0.25rem;">Nilai Anda memenuhi seluruh ambang batas SKD resmi BKN.</div>
         </div>
         <div style="text-align: right;">
           <div style="font-size: 0.8rem; opacity: 0.85;">SKOR TOTAL</div>
-          <div id="resTotalScore" style="font-size: 2.75rem; font-weight: 800; font-family: 'JetBrains Mono', monospace;">0</div>
+          <div id="evalTotalScore" style="font-size: 2.75rem; font-weight: 800; font-family: 'JetBrains Mono', monospace;">0</div>
         </div>
       </div>
 
-      <!-- Score Breakdown Cards -->
-      <div class="score-cards-grid">
-        <div class="score-card">
+      <!-- Score Breakdown Row -->
+      <div class="score-breakdown-row">
+        <div class="eval-score-card">
           <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">TWK (Target ≥ 65)</div>
-          <div class="score-val" id="resScoreTwk">0</div>
-          <span id="resBadgeTwk" class="badge-pg-pass">LULUS</span>
+          <div class="eval-score-num" id="evalScoreTwk">0</div>
+          <span id="evalBadgeTwk" class="badge-status-pill status-lulus">LULUS</span>
         </div>
 
-        <div class="score-card">
+        <div class="eval-score-card">
           <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">TIU (Target ≥ 80)</div>
-          <div class="score-val" id="resScoreTiu">0</div>
-          <span id="resBadgeTiu" class="badge-pg-pass">LULUS</span>
+          <div class="eval-score-num" id="evalScoreTiu">0</div>
+          <span id="evalBadgeTiu" class="badge-status-pill status-lulus">LULUS</span>
         </div>
 
-        <div class="score-card">
+        <div class="eval-score-card">
           <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">TKP (Target ≥ 156)</div>
-          <div class="score-val" id="resScoreTkp">0</div>
-          <span id="resBadgeTkp" class="badge-pg-pass">LULUS</span>
+          <div class="eval-score-num" id="evalScoreTkp">0</div>
+          <span id="evalBadgeTkp" class="badge-status-pill status-lulus">LULUS</span>
         </div>
 
-        <div class="score-card">
-          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Waktu Pengerjaan</div>
-          <div class="score-val" id="resTimeSpent" style="font-size: 1.8rem; margin: 0.6rem 0;">00:00</div>
-          <div style="font-size: 0.75rem; color: var(--text-muted);" id="resStatsText">100 Soal Selesai</div>
+        <div class="eval-score-card">
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Waktu Tempuh</div>
+          <div class="eval-score-num" id="evalTimeSpent" style="font-size: 1.8rem; margin: 0.6rem 0;">00:00</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);" id="evalSummaryText">100 Soal Selesai</div>
         </div>
       </div>
 
-      <!-- In-Depth Solutions Filter & List -->
+      <!-- Pembahasan Lengkap -->
       <div style="margin-top: 3rem;">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
-          <h3 style="font-size: 1.4rem; font-weight: 800; color: #0f172a;">💡 Pembahasan & Langkah Penyelesaian</h3>
+          <h4 style="font-size: 1.35rem; font-weight: 800; color: var(--brand-dark);">💡 Pembahasan & Langkah Penyelesaian</h4>
 
-          <div class="filter-pills">
-            <button class="pill-btn active" onclick="filterReview('all', this)">Semua (<span id="revCountAll">0</span>)</button>
-            <button class="pill-btn" onclick="filterReview('wrong', this)">Salah/Belum Maksimal (<span id="revCountWrong">0</span>)</button>
-            <button class="pill-btn" onclick="filterReview('twk', this)">TWK</button>
-            <button class="pill-btn" onclick="filterReview('tiu', this)">TIU</button>
-            <button class="pill-btn" onclick="filterReview('tkp', this)">TKP</button>
+          <div style="display: flex; gap: 0.4rem; background: #e2e8f0; padding: 0.25rem; border-radius: 10px;">
+            <button class="btn btn-outline" style="background:#fff; border:none; padding:0.35rem 0.8rem; font-size:0.8rem;" onclick="filterSolutionList('all', this)">Semua (<span id="solCountAll">0</span>)</button>
+            <button class="btn btn-outline" style="border:none; padding:0.35rem 0.8rem; font-size:0.8rem;" onclick="filterSolutionList('wrong', this)">Salah/Belum Maksimal (<span id="solCountWrong">0</span>)</button>
+            <button class="btn btn-outline" style="border:none; padding:0.35rem 0.8rem; font-size:0.8rem;" onclick="filterSolutionList('twk', this)">TWK</button>
+            <button class="btn btn-outline" style="border:none; padding:0.35rem 0.8rem; font-size:0.8rem;" onclick="filterSolutionList('tiu', this)">TIU</button>
+            <button class="btn btn-outline" style="border:none; padding:0.35rem 0.8rem; font-size:0.8rem;" onclick="filterSolutionList('tkp', this)">TKP</button>
           </div>
         </div>
 
-        <div id="reviewItemsContainer"></div>
+        <div id="solutionCardsContainer"></div>
       </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="footer" id="about">
-    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-      <div style="font-size: 1.25rem; font-weight: 800; color: #fff;">oneshot<span style="color:var(--brand-amber)">ASN</span> CAT Simulator</div>
-      <p style="max-width: 600px; line-height: 1.6;">
-        Platform latihan dan simulasi ujian CAT CPNS berstandar resmi dengan bank soal dinamis teracak dan pembahasan komprehensif. Dibuat untuk pejuang NIP seluruh Indonesia.
-      </p>
-      <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 1rem;">© 2026 oneshotASN CPNS Simulator. 100% Gratis & Terbuka.</div>
+  <footer class="site-footer">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <strong style="color: #fff; font-size: 1.1rem;">GARUDA CAT SIMULATOR</strong>
+      <p style="margin: 0.5rem 0 1rem; color: #94a3b8;">Sistem Simulasi Ujian SKD CPNS Terbuka & Berkelanjutan</p>
+      <div style="font-size: 0.775rem; opacity: 0.6;">© 2026 Garuda CAT. Hak Cipta Dilindungi Undang-Undang.</div>
     </div>
   </footer>
 
   <script>
     // State Aplikasi
-    let currentExamSession = null;
-    let currentPos = 1;
-    let examTimerInterval = null;
-    let examResultData = null;
-    let reviewFilter = 'all';
+    let currentSession = null;
+    let currentPosition = 1;
+    let timerCountdown = null;
+    let resultPayload = null;
+    let solutionFilter = 'all';
 
-    // Inisialisasi Saat Halaman Dimuat
     document.addEventListener('DOMContentLoaded', () => {
-      loadLeaderboard();
-      // Auto-refresh leaderboard tiap 30 detik (seperti oneshotasn)
-      setInterval(loadLeaderboard, 30000);
+      fetchLeaderboard();
+      setInterval(fetchLeaderboard, 30000);
     });
 
-    // 1. Fetch & Render Leaderboard Live
-    async function loadLeaderboard() {
+    // 1. Leaderboard Fetch & Render
+    async function fetchLeaderboard() {
       try {
         const res = await fetch('/api/ranking');
         const data = await res.json();
@@ -1405,97 +1260,44 @@
     }
 
     function renderLeaderboard(ranking) {
-      const podiumArea = document.getElementById('podiumArea');
-      const tableBody = document.getElementById('rankingTableBody');
+      const hofList = document.getElementById('hofList');
+      const tableBody = document.getElementById('lbTableBody');
 
-      // Top 3 Podium
-      const top1 = ranking[0] || { name: '-', total: 0 };
-      const top2 = ranking[1] || { name: '-', total: 0 };
-      const top3 = ranking[2] || { name: '-', total: 0 };
-
-      podiumArea.innerHTML = `
-        <!-- Juara 2 (Kiri) -->
-        <div class="podium-col podium-2">
-          <div class="podium-avatar">🥈</div>
-          <div class="podium-name">${top2.name}</div>
-          <div class="podium-score">${top2.total}</div>
-          <div class="podium-block">2</div>
+      // Top 3 Hall of Fame
+      const top3 = ranking.slice(0, 3);
+      hofList.innerHTML = top3.map((r, i) => `
+        <div class="hof-item">
+          <div class="hof-rank-medal medal-${i+1}">#${i+1}</div>
+          <div class="hof-info">
+            <div class="hof-name">${r.name}</div>
+            <div style="font-size:0.75rem; color:#94a3b8;">${r.mode || 'SKD'}</div>
+          </div>
+          <div class="hof-score">${r.total}</div>
         </div>
+      `).join('');
 
-        <!-- Juara 1 (Tengah) -->
-        <div class="podium-col podium-1">
-          <div class="podium-avatar">👑</div>
-          <div class="podium-name">${top1.name}</div>
-          <div class="podium-score">${top1.total}</div>
-          <div class="podium-block">1</div>
-        </div>
-
-        <!-- Juara 3 (Kanan) -->
-        <div class="podium-col podium-3">
-          <div class="podium-avatar">🥉</div>
-          <div class="podium-name">${top3.name}</div>
-          <div class="podium-score">${top3.total}</div>
-          <div class="podium-block">3</div>
-        </div>
-      `;
-
-      // Tabel Ranking
-      tableBody.innerHTML = '';
-      ranking.forEach((r, idx) => {
-        const tr = document.createElement('tr');
-        const isPassed = r.passed;
-
-        tr.innerHTML = `
-          <td class="rank-num">#${idx + 1}</td>
+      // Leaderboard Table
+      tableBody.innerHTML = ranking.map((r, i) => `
+        <tr>
+          <td><strong style="font-family:'JetBrains Mono',monospace;">#${i+1}</strong></td>
           <td><strong>${r.name}</strong></td>
-          <td><span style="font-size:0.8rem; background:#f1f5f9; padding:0.15rem 0.5rem; border-radius:4px;">${r.mode || 'SKD'}</span></td>
           <td><span style="color:#64748b;">TWK</span> ${r.twk} &nbsp;|&nbsp; <span style="color:#64748b;">TIU</span> ${r.tiu} &nbsp;|&nbsp; <span style="color:#64748b;">TKP</span> ${r.tkp}</td>
-          <td><strong style="font-family:'JetBrains Mono',monospace; font-size:1.05rem; color:#1d5ef1;">${r.total}</strong></td>
-          <td><span class="${isPassed ? 'badge-pg-pass' : 'badge-pg-fail'}">${isPassed ? 'Lulus PG' : 'Belum lulus'}</span></td>
+          <td><strong style="font-family:'JetBrains Mono',monospace; font-size:1.05rem; color:var(--brand-teal);">${r.total}</strong></td>
+          <td><span class="badge-status-pill ${r.passed ? 'status-lulus' : 'status-gagal'}">${r.passed ? 'Lulus PG' : 'Belum Lulus'}</span></td>
           <td style="color:#64748b; font-size:0.8rem;">${r.timestamp || '-'}</td>
-        `;
-        tableBody.appendChild(tr);
-      });
+        </tr>
+      `).join('');
     }
 
-    // Filter Paket Tryout
-    function filterPackages(category, btn) {
-      document.querySelectorAll('.filter-pills .pill-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      document.querySelectorAll('.pkg-card').forEach(card => {
-        if (category === 'all' || card.dataset.cat === category) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+    // 2. Start Exam Triggers
+    function triggerQuickLaunch(modeId) {
+      document.getElementById('selectModeHub').value = modeId;
+      startFromDock();
     }
 
-    // Modal Mulai Ujian
-    function openStartModal(modeId) {
-      document.getElementById('modalSelectedMode').value = modeId;
-      const infoMap = {
-        sim100: 'Simulasi CAT 100 Soal Acak · 90 Menit (TWK 27 · TIU 32 · TKP 41)',
-        skd110: 'Gladi Bersih SKD Resmi 110 Soal · 100 Menit (TWK 30 · TIU 35 · TKP 45)',
-        tiu25: 'Latihan Spesialis TIU · 25 Soal · 35 Menit (Numerik & Penalaran)',
-        twk25: 'Drilling Soal TWK · 25 Soal · 25 Menit (Kebangsaan & Integritas)',
-        tkp25: 'Drilling Soal TKP · 25 Soal · 25 Menit (Skala 1-5)',
-        mini20: 'Mini Test Campuran · 20 Soal · 20 Menit'
-      };
-      document.getElementById('modalModeInfo').textContent = infoMap[modeId] || 'Simulasi Ujian CPNS';
-      document.getElementById('startModal').style.display = 'flex';
-    }
-
-    function closeStartModal() {
-      document.getElementById('startModal').style.display = 'none';
-    }
-
-    document.getElementById('modalStartForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const userName = document.getElementById('modalUserName').value.trim();
-      const modeId = document.getElementById('modalSelectedMode').value;
-      closeStartModal();
+    async function startFromDock() {
+      const userName = document.getElementById('inputUserName').value.trim() || 'Peserta';
+      const modeId = document.getElementById('selectModeHub').value;
 
       try {
         const res = await fetch('/api/exam/start', {
@@ -1505,248 +1307,238 @@
         });
         const data = await res.json();
         if (data.success) {
-          launchExamSession(data.sessionId);
+          launchExamRunner(data.sessionId);
         } else {
-          alert('Gagal memulai sesi: ' + data.error);
+          alert('Gagal memulai: ' + data.error);
         }
       } catch (err) {
-        alert('Gagal menghubungi server: ' + err.message);
+        alert('Kendala server: ' + err.message);
       }
-    });
+    }
 
-    // 2. Launch CAT Exam Runner
-    async function launchExamSession(sessionId) {
+    // 3. CAT Exam Runner Session
+    async function launchExamRunner(sessionId) {
       try {
         const res = await fetch(`/api/exam/${sessionId}`);
         const data = await res.json();
         if (!data.success) return alert(data.error);
 
-        currentExamSession = data.session;
-        currentPos = 1;
+        currentSession = data.session;
+        currentPosition = 1;
 
-        // Render header info
-        document.getElementById('examParticipantInfo').innerHTML = `Peserta: <strong>${currentExamSession.userName}</strong> (${currentExamSession.participantNo})`;
+        document.getElementById('catExamUserInfo').innerHTML = `Peserta: <strong>${currentSession.userName}</strong> (${currentSession.participantNo})`;
+        document.getElementById('catExamModal').classList.add('active');
 
-        // Tampilkan modal fullscreen ujian
-        document.getElementById('catExamModal').classList.add('open');
-
-        // Start timer
-        startCountdownTimer(currentExamSession.deadlineAt);
-
-        // Render nomor & soal
-        renderPalette();
-        renderQuestionAt(1);
-      } catch (err) {
-        alert('Kendala memuat sesi: ' + err.message);
+        startTimerClock(currentSession.deadlineAt);
+        renderPaletteBoxes();
+        renderQuestion(1);
+      } catch (e) {
+        alert('Gagal membuka ujian: ' + e.message);
       }
     }
 
-    function startCountdownTimer(deadlineAt) {
-      if (examTimerInterval) clearInterval(examTimerInterval);
-      const timerDisplay = document.getElementById('examTimerDisplay');
-      const timerBox = document.getElementById('examTimerBox');
+    function startTimerClock(deadlineAt) {
+      if (timerCountdown) clearInterval(timerCountdown);
+      const text = document.getElementById('catTimerText');
+      const box = document.getElementById('catTimerBox');
 
-      const update = () => {
+      const tick = () => {
         const remain = Math.max(0, Math.floor((deadlineAt - Date.now()) / 1000));
         const h = Math.floor(remain / 3600);
         const m = Math.floor((remain % 3600) / 60);
         const s = remain % 60;
         const pad = (n) => String(n).padStart(2, '0');
 
-        timerDisplay.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-        if (remain <= 300) timerBox.classList.add('danger');
-        else timerBox.classList.remove('danger');
+        text.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+        if (remain <= 300) box.classList.add('danger');
+        else box.classList.remove('danger');
 
         if (remain <= 0) {
-          clearInterval(examTimerInterval);
+          clearInterval(timerCountdown);
           alert('Waktu ujian telah berakhir!');
-          submitAndFinishExam();
+          finishExamNow();
         }
       };
 
-      update();
-      examTimerInterval = setInterval(update, 1000);
+      tick();
+      timerCountdown = setInterval(tick, 1000);
     }
 
-    function renderPalette() {
-      const grid = document.getElementById('numberPaletteGrid');
+    function renderPaletteBoxes() {
+      const grid = document.getElementById('catPaletteGrid');
       grid.innerHTML = '';
-      let answeredCount = 0;
+      let answered = 0;
 
-      currentExamSession.questions.forEach(q => {
+      currentSession.questions.forEach(q => {
         const btn = document.createElement('button');
-        btn.className = 'num-btn';
+        btn.className = 'palette-btn';
         btn.textContent = q.position;
         btn.dataset.pos = q.position;
 
-        const ans = currentExamSession.answers[q.position];
+        const ans = currentSession.answers[q.position];
         if (ans && ans.selectedLabel) {
-          answeredCount++;
+          answered++;
           if (ans.isDoubt) btn.classList.add('doubt');
           else btn.classList.add('answered');
         }
 
-        if (q.position === currentPos) btn.classList.add('active');
+        if (q.position === currentPosition) btn.classList.add('active');
 
-        btn.addEventListener('click', () => renderQuestionAt(q.position));
+        btn.addEventListener('click', () => renderQuestion(q.position));
         grid.appendChild(btn);
       });
 
-      document.getElementById('paletteCounter').textContent = `${answeredCount} / ${currentExamSession.questions.length}`;
+      document.getElementById('catPaletteProgress').textContent = `${answered} / ${currentSession.questions.length}`;
     }
 
-    function renderQuestionAt(pos) {
-      currentPos = pos;
-      const q = currentExamSession.questions.find(x => x.position === pos);
+    function renderQuestion(pos) {
+      currentPosition = pos;
+      const q = currentSession.questions.find(x => x.position === pos);
       if (!q) return;
 
-      document.getElementById('qBadgeNum').textContent = `Soal No. ${q.position}`;
-      document.getElementById('qBadgeSubtest').textContent = q.subtest;
-      document.getElementById('qBadgeCat').textContent = `${q.category} · ${q.difficulty}`;
-      document.getElementById('qBodyText').textContent = q.body;
+      document.getElementById('catQNum').textContent = `Soal No. ${q.position}`;
+      document.getElementById('catQSubtest').textContent = q.subtest;
+      document.getElementById('catQCat').textContent = `${q.category} · ${q.difficulty}`;
+      document.getElementById('catQBody').textContent = q.body;
 
-      const userAns = currentExamSession.answers[q.position] || { selectedLabel: null, isDoubt: false };
-      document.getElementById('qDoubtIndicator').style.display = userAns.isDoubt ? 'inline-block' : 'none';
+      const userAns = currentSession.answers[q.position] || { selectedLabel: null, isDoubt: false };
+      document.getElementById('catQDoubtTag').style.display = userAns.isDoubt ? 'inline-block' : 'none';
 
-      const optList = document.getElementById('qOptionsList');
-      optList.innerHTML = '';
+      const optArea = document.getElementById('catQOptionsArea');
+      optArea.innerHTML = '';
 
       q.options.forEach(opt => {
-        const item = document.createElement('div');
-        item.className = 'option-btn' + (userAns.selectedLabel === opt.label ? ' selected' : '');
-        item.innerHTML = `
-          <div class="option-circle">${opt.label}</div>
-          <div style="flex:1; padding-top:0.15rem; font-size:0.95rem; line-height:1.55;">${opt.text}</div>
+        const row = document.createElement('div');
+        row.className = 'option-row' + (userAns.selectedLabel === opt.label ? ' selected' : '');
+        row.innerHTML = `
+          <div class="option-char">${opt.label}</div>
+          <div style="flex:1; padding-top:0.2rem; font-size:0.95rem; line-height:1.55;">${opt.text}</div>
         `;
-        item.addEventListener('click', () => saveAnswerFor(q.position, opt.label, userAns.isDoubt));
-        optList.appendChild(item);
+        row.addEventListener('click', () => saveAndSyncAnswer(q.position, opt.label, userAns.isDoubt));
+        optArea.appendChild(row);
       });
 
-      document.querySelectorAll('.num-palette-grid .num-btn').forEach(btn => {
+      document.querySelectorAll('.palette-box-grid .palette-btn').forEach(btn => {
         btn.classList.toggle('active', Number(btn.dataset.pos) === pos);
       });
 
-      document.getElementById('btnPrev').disabled = (pos === 1);
-      document.getElementById('btnNext').textContent = (pos === currentExamSession.questions.length) ? 'Simpan' : 'Simpan & Lanjut »';
+      document.getElementById('btnCatPrev').disabled = (pos === 1);
+      document.getElementById('btnCatNext').textContent = (pos === currentSession.questions.length) ? 'Simpan' : 'Simpan & Lanjut »';
     }
 
-    async function saveAnswerFor(pos, selectedLabel, isDoubt) {
-      currentExamSession.answers[pos] = { selectedLabel, isDoubt };
-      renderQuestionAt(pos);
-      renderPalette();
+    async function saveAndSyncAnswer(pos, selectedLabel, isDoubt) {
+      currentSession.answers[pos] = { selectedLabel, isDoubt };
+      renderQuestion(pos);
+      renderPaletteBoxes();
 
       try {
-        await fetch(`/api/exam/${currentExamSession.id}/answer`, {
+        await fetch(`/api/exam/${currentSession.id}/answer`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ position: pos, selectedLabel, isDoubt })
         });
       } catch (e) {
-        console.warn('Gagal sync jawaban:', e);
+        console.warn('Sync gagal:', e);
       }
     }
 
-    // Navigasi Ujian
-    document.getElementById('btnPrev').addEventListener('click', () => { if (currentPos > 1) renderQuestionAt(currentPos - 1); });
-    document.getElementById('btnNext').addEventListener('click', () => { if (currentPos < currentExamSession.questions.length) renderQuestionAt(currentPos + 1); });
-    document.getElementById('btnDoubt').addEventListener('click', () => {
-      const cur = currentExamSession.answers[currentPos] || { selectedLabel: null, isDoubt: false };
-      saveAnswerFor(currentPos, cur.selectedLabel, !cur.isDoubt);
+    document.getElementById('btnCatPrev').addEventListener('click', () => { if (currentPosition > 1) renderQuestion(currentPosition - 1); });
+    document.getElementById('btnCatNext').addEventListener('click', () => { if (currentPosition < currentSession.questions.length) renderQuestion(currentPosition + 1); });
+    document.getElementById('btnCatDoubt').addEventListener('click', () => {
+      const cur = currentSession.answers[currentPosition] || { selectedLabel: null, isDoubt: false };
+      saveAndSyncAnswer(currentPosition, cur.selectedLabel, !cur.isDoubt);
     });
 
-    document.getElementById('btnFinish').addEventListener('click', () => {
-      let unanswered = 0;
-      currentExamSession.questions.forEach(q => {
-        const a = currentExamSession.answers[q.position];
-        if (!a || !a.selectedLabel) unanswered++;
+    document.getElementById('btnCatFinish').addEventListener('click', () => {
+      let unans = 0;
+      currentSession.questions.forEach(q => {
+        const a = currentSession.answers[q.position];
+        if (!a || !a.selectedLabel) unans++;
       });
-
-      let msg = 'Apakah Anda yakin ingin menyelesaikan ujian sekarang?';
-      if (unanswered > 0) msg = `Perhatian: Masih ada ${unanswered} soal yang BELUM dijawab. Yakin ingin mengakhiri ujian?`;
-
-      if (confirm(msg)) submitAndFinishExam();
+      let msg = 'Apakah Anda yakin ingin menyelesaikan simulasi sekarang?';
+      if (unans > 0) msg = `Perhatian: Ada ${unans} nomor yang BELUM dijawab. Yakin ingin mengakhiri ujian?`;
+      if (confirm(msg)) finishExamNow();
     });
 
-    async function submitAndFinishExam() {
-      if (examTimerInterval) clearInterval(examTimerInterval);
+    async function finishExamNow() {
+      if (timerCountdown) clearInterval(timerCountdown);
       try {
-        const res = await fetch(`/api/exam/${currentExamSession.id}/submit`, { method: 'POST' });
+        const res = await fetch(`/api/exam/${currentSession.id}/submit`, { method: 'POST' });
         const data = await res.json();
         if (data.success) {
-          document.getElementById('catExamModal').classList.remove('open');
-          openResultModal(data.result);
-          loadLeaderboard(); // refresh ranking langsung
+          document.getElementById('catExamModal').classList.remove('active');
+          openResultStudio(data.result);
+          fetchLeaderboard();
         } else {
           alert('Gagal submit: ' + data.error);
         }
       } catch (err) {
-        alert('Kendala submit ujian: ' + err.message);
+        alert('Kendala submit: ' + err.message);
       }
     }
 
-    // 3. Render Hasil Ujian & Pembahasan Langkah demi Langkah
-    function openResultModal(result) {
-      examResultData = result;
-      document.getElementById('catResultModal').classList.add('open');
+    // 4. Result Studio & Solutions
+    function openResultStudio(result) {
+      resultPayload = result;
+      document.getElementById('catResultModal').classList.add('active');
 
-      const scores = result.scores;
-      const isPassed = scores.passingStatus.allPassed;
+      const sc = result.scores;
+      const isPassed = sc.passingStatus.allPassed;
 
-      const banner = document.getElementById('resStatusBanner');
-      banner.className = `status-banner ${isPassed ? 'passed' : 'failed'}`;
-      document.getElementById('resStatusTitle').textContent = isPassed ? 'MEMENUHI PASSING GRADE' : 'BELUM MEMENUHI PASSING GRADE';
-      document.getElementById('resStatusSub').textContent = isPassed
-        ? 'Luar biasa! Skor Anda melampaui seluruh nilai ambang batas resmi BKN.'
-        : 'Tetap semangat! Pelajari pembahasan bertahap di bawah ini untuk menguasai materi yang belum maksimal.';
+      const banner = document.getElementById('evalStatusBanner');
+      banner.className = `eval-banner ${isPassed ? 'passed' : 'failed'}`;
+      document.getElementById('evalStatusTitle').textContent = isPassed ? 'MEMENUHI PASSING GRADE SKD' : 'BELUM MEMENUHI PASSING GRADE';
+      document.getElementById('evalStatusSub').textContent = isPassed
+        ? 'Luar biasa! Seluruh nilai subtes Anda melampaui standar kelulusan resmi BKN.'
+        : 'Jangan berkecil hati. Pelajari langkah penyelesaian dan analisis konsep di bawah ini.';
 
-      document.getElementById('resTotalScore').textContent = scores.normalized.total;
-      document.getElementById('resScoreTwk').textContent = scores.normalized.twk;
-      document.getElementById('resScoreTiu').textContent = scores.normalized.tiu;
-      document.getElementById('resScoreTkp').textContent = scores.normalized.tkp;
+      document.getElementById('evalTotalScore').textContent = sc.normalized.total;
+      document.getElementById('evalScoreTwk').textContent = sc.normalized.twk;
+      document.getElementById('evalScoreTiu').textContent = sc.normalized.tiu;
+      document.getElementById('evalScoreTkp').textContent = sc.normalized.tkp;
 
-      const setBadge = (elId, pass) => {
-        const el = document.getElementById(elId);
-        el.className = pass ? 'badge-pg-pass' : 'badge-pg-fail';
+      const setBadge = (id, pass) => {
+        const el = document.getElementById(id);
+        el.className = `badge-status-pill ${pass ? 'status-lulus' : 'status-gagal'}`;
         el.textContent = pass ? 'LULUS' : 'TIDAK LULUS';
       };
-      setBadge('resBadgeTwk', scores.passingStatus.twk);
-      setBadge('resBadgeTiu', scores.passingStatus.tiu);
-      setBadge('resBadgeTkp', scores.passingStatus.tkp);
+      setBadge('evalBadgeTwk', sc.passingStatus.twk);
+      setBadge('evalBadgeTiu', sc.passingStatus.tiu);
+      setBadge('evalBadgeTkp', sc.passingStatus.tkp);
 
       const mins = Math.floor(result.timeSpentSeconds / 60);
       const secs = result.timeSpentSeconds % 60;
-      document.getElementById('resTimeSpent').textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
-      document.getElementById('resStatsText').textContent = `${result.stats.answeredCount} Terjawab · ${result.stats.unansweredCount} Kosong`;
+      document.getElementById('evalTimeSpent').textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+      document.getElementById('evalSummaryText').textContent = `${result.stats.answeredCount} Terjawab · ${result.stats.unansweredCount} Kosong`;
 
-      // Counter filter
       let wrongCount = 0;
       result.reviewItems.forEach(it => { if (it.scoreAwarded < 5) wrongCount++; });
-      document.getElementById('revCountAll').textContent = result.reviewItems.length;
-      document.getElementById('revCountWrong').textContent = wrongCount;
+      document.getElementById('solCountAll').textContent = result.reviewItems.length;
+      document.getElementById('solCountWrong').textContent = wrongCount;
 
-      renderReviewItems();
+      renderSolutionsList();
     }
 
-    function closeResultModal() {
-      document.getElementById('catResultModal').classList.remove('open');
+    function closeResultStudio() {
+      document.getElementById('catResultModal').classList.remove('active');
     }
 
-    function filterReview(cat, btn) {
-      document.querySelectorAll('#catResultModal .pill-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      reviewFilter = cat;
-      renderReviewItems();
+    function filterSolutionList(cat, btn) {
+      document.querySelectorAll('#catResultModal .btn-outline').forEach(b => b.style.background = 'transparent');
+      btn.style.background = '#fff';
+      solutionFilter = cat;
+      renderSolutionsList();
     }
 
-    function renderReviewItems() {
-      const container = document.getElementById('reviewItemsContainer');
+    function renderSolutionsList() {
+      const container = document.getElementById('solutionCardsContainer');
       container.innerHTML = '';
 
-      const items = examResultData.reviewItems.filter(it => {
-        if (reviewFilter === 'wrong') return it.scoreAwarded < 5;
-        if (reviewFilter === 'twk') return it.subtest === 'TWK';
-        if (reviewFilter === 'tiu') return it.subtest === 'TIU';
-        if (reviewFilter === 'tkp') return it.subtest === 'TKP';
+      const items = resultPayload.reviewItems.filter(it => {
+        if (solutionFilter === 'wrong') return it.scoreAwarded < 5;
+        if (solutionFilter === 'twk') return it.subtest === 'TWK';
+        if (solutionFilter === 'tiu') return it.subtest === 'TIU';
+        if (solutionFilter === 'tkp') return it.subtest === 'TKP';
         return true;
       });
 
@@ -1755,10 +1547,7 @@
         const isTkp = (it.subtest === 'TKP');
         const isMax = (it.scoreAwarded === 5);
 
-        let cClass = 'explanation-card ';
-        if (isTkp) cClass += isMax ? 'correct' : 'tkp';
-        else cClass += isMax ? 'correct' : 'incorrect';
-        card.className = cClass;
+        card.style.cssText = `background:#fff; border:1.5px solid var(--border); border-radius:14px; padding:1.5rem; margin-bottom:1.25rem; border-left:6px solid ${isMax ? 'var(--success)' : (isTkp ? 'var(--brand-teal)' : 'var(--danger)')};`;
 
         let optHtml = '';
         it.options.forEach(opt => {
@@ -1795,11 +1584,11 @@
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
             <div style="display: flex; align-items: center; gap: 0.6rem;">
               <strong>Soal No. ${it.position}</strong>
-              <span style="font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: 9999px; background: #e0e7ff; color: #3730a3;">${it.subtest}</span>
+              <span style="font-size: 0.75rem; font-weight: 800; padding: 0.15rem 0.55rem; border-radius: 9999px; background: #ccfbf1; color: #0f766e;">${it.subtest}</span>
               <span style="font-size: 0.8rem; color: #64748b;">${it.category} · ${it.difficulty}</span>
             </div>
             <div>
-              ${isTkp ? `<strong style="color:#15803d;">Skor Anda: ${it.scoreAwarded} / 5</strong>` : (isMax ? '<strong style="color:#16a34a;">Benar (+5)</strong>' : '<strong style="color:#dc2626;">Salah (0)</strong>')}
+              ${isTkp ? `<strong style="color:var(--brand-teal);">Skor Anda: ${it.scoreAwarded} / 5</strong>` : (isMax ? '<strong style="color:var(--success);">Benar (+5)</strong>' : '<strong style="color:var(--danger);">Salah (0)</strong>')}
             </div>
           </div>
 
@@ -1807,9 +1596,9 @@
 
           <div style="margin-bottom: 0.85rem;">${optHtml}</div>
 
-          <div class="sol-box">
-            <div style="font-weight: 700; color: #1e3a8a; margin-bottom: 0.4rem;">💡 Pembahasan & Langkah Penyelesaian:</div>
-            <div>${it.explanation || 'Pembahasan telah diverifikasi oleh tim standar CAT BKN.'}</div>
+          <div class="step-solution-box">
+            <strong style="color: var(--brand-teal); display: block; margin-bottom: 0.35rem;">💡 Analisis & Langkah Penyelesaian:</strong>
+            <div>${it.explanation || 'Pembahasan terverifikasi sesuai kaidah resmi CAT BKN.'}</div>
           </div>
         `;
 
