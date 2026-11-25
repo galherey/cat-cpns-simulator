@@ -49,11 +49,22 @@ const leaderboardRecords = [
   { rank: 8, name: 'Maya Anggraini', mode: 'sim100', twk: 90, tiu: 110, tkp: 165, total: 365, passed: true, timestamp: '6 Jam lalu' }
 ];
 
+const MIME_TYPES = {
+  '.html': 'text/html; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon'
+};
+
 function sendJson(res, statusCode, data) {
-  res.writeHead(statusCode, {
-    'Content-Type': 'application/json; charset=utf-8',
-    'Cache-Control': 'no-store'
-  });
+  if (res.headersSent) return;
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
+  res.statusCode = statusCode;
   res.end(JSON.stringify(data));
 }
 
@@ -94,9 +105,31 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (method === 'OPTIONS') {
-    res.writeHead(204);
+    res.statusCode = 204;
     res.end();
     return;
+  }
+
+  // Handle static files when invoked for non-api routes
+  if (!pathname.startsWith('/api/') && pathname !== '/api') {
+    let safePath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, '');
+    if (safePath === '/' || safePath === '\\' || safePath === '') {
+      safePath = '/index.html';
+    }
+    const publicDir = path.join(__dirname, '..', 'public');
+    const targetFile = path.join(publicDir, safePath);
+    if (fs.existsSync(targetFile) && fs.statSync(targetFile).isFile()) {
+      const ext = path.extname(targetFile).toLowerCase();
+      res.setHeader('Content-Type', MIME_TYPES[ext] || 'application/octet-stream');
+      res.statusCode = 200;
+      return fs.createReadStream(targetFile).pipe(res);
+    }
+    const indexFile = path.join(publicDir, 'index.html');
+    if (fs.existsSync(indexFile)) {
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      res.statusCode = 200;
+      return fs.createReadStream(indexFile).pipe(res);
+    }
   }
 
   try {
