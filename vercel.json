@@ -1,17 +1,13 @@
 {
   "version": 2,
   "functions": {
-    "api/index.js": {
-      "includeFiles": "{data,lib,public}/**"
+    "api/**/*.js": {
+      "includeFiles": ["data/**", "lib/**"]
     }
   },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/(.*)",
       "destination": "/api/index.js"
     }
   ]
