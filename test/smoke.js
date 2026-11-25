@@ -82,10 +82,38 @@ server.listen(TEST_PORT, () => {
       assert(json.success);
       assert(json.modes.length >= 4);
       console.log('   ✓ Endpoint /api/modes merespons 200 OK dengan daftar mode ujian');
-      server.close(() => {
-        console.log('\n--- SEMUA PENGUJIAN BERHASIL (PASSED) ---');
-        process.exit(0);
+
+      // 5. Uji Endpoint Generator Prompt Soal
+      const postData = JSON.stringify({ subtes: 'TWK', kategori: 'Pilar Negara', model: 'HOTS', jumlah: 2 });
+      const reqPrompt = http.request({
+        hostname: 'localhost',
+        port: TEST_PORT,
+        path: '/api/prompt/generate',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(postData)
+        }
+      }, (resPrompt) => {
+        assert.strictEqual(resPrompt.statusCode, 200);
+        let promptData = '';
+        resPrompt.on('data', chunk => promptData += chunk);
+        resPrompt.on('end', () => {
+          const promptJson = JSON.parse(promptData);
+          assert(promptJson.success);
+          assert.strictEqual(promptJson.soal.length, 2);
+          assert(promptJson.soal[0].pertanyaan);
+          assert(promptJson.soal[0].pembahasan);
+          console.log('   ✓ Endpoint /api/prompt/generate merespons 200 OK dengan soal terverifikasi');
+
+          server.close(() => {
+            console.log('\n--- SEMUA PENGUJIAN BERHASIL (PASSED) ---');
+            process.exit(0);
+          });
+        });
       });
+      reqPrompt.write(postData);
+      reqPrompt.end();
     });
   });
 });

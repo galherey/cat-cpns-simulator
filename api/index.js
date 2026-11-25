@@ -13,6 +13,9 @@ const {
   submitExam,
   getExamResult
 } = require('../lib/exam');
+const { makeRng } = require('../lib/rng');
+const { staticTwk, staticTkp } = require('../lib/bank');
+const { generate: generateTiu } = require('../lib/generators');
 
 // In-Memory User Database (diisi akun demo awal + pendaftar baru)
 const usersDb = new Map([
@@ -295,6 +298,102 @@ module.exports = async (req, res) => {
       leaderboardRecords.unshift(newEntry);
 
       return sendJson(res, 200, { success: true, result });
+    }
+
+    // POST /api/prompt/generate
+    if ((pathname === '/api/prompt/generate' || pathname === '/prompt/generate') && method === 'POST') {
+      const body = await parseBody(req);
+      const subtes = (body.subtes || 'TWK').toUpperCase();
+      const kategori = body.kategori || 'Pilar Negara';
+      const model = body.model || 'HOTS';
+      const kesulitan = body.kesulitan || 'Sulit';
+      const count = Math.min(Math.max(parseInt(body.jumlah, 10) || 5, 1), 25);
+
+      const rng = makeRng('prompt_' + Date.now());
+      const generatedItems = [];
+
+      if (subtes === 'TIU') {
+        const cats = ['Deret Angka Bertingkat', 'Aritmetika Sosial & Persentase', 'Kecepatan, Jarak & Waktu', 'Silogisme Logika Formal', 'Analitis Posisi & Urutan'];
+        for (let i = 0; i < count; i++) {
+          const cat = cats[i % cats.length];
+          const diff = (kesulitan.toLowerCase() === 'mudah' || kesulitan.toLowerCase() === 'sedang') ? kesulitan.toLowerCase() : 'sulit';
+          const q = generateTiu(cat, diff, rng.int(10000, 999999));
+          const optMap = {};
+          const letters = ['A', 'B', 'C', 'D', 'E'];
+          let correctLetter = 'A';
+          q.options.forEach((opt, idx) => {
+            optMap[letters[idx]] = opt.text;
+            if (opt.correct) correctLetter = letters[idx];
+          });
+          generatedItems.push({
+            nomor: i + 1,
+            subtes: 'TIU',
+            kategori: q.category,
+            model,
+            kesulitan,
+            pertanyaan: q.body,
+            opsi: optMap,
+            kunci: correctLetter,
+            pembahasan: q.explanation
+          });
+        }
+      } else if (subtes === 'TKP') {
+        const pool = staticTkp.filter(q => !kategori || q.category.toLowerCase().includes(kategori.toLowerCase()));
+        const src = pool.length >= count ? pool : staticTkp;
+        const shuffled = rng.shuffle([...src]);
+        for (let i = 0; i < count; i++) {
+          const item = shuffled[i % shuffled.length];
+          const labels = ['A', 'B', 'C', 'D', 'E'];
+          const optMap = {};
+          const bobotMap = {};
+          item.options.forEach((opt, idx) => {
+            optMap[labels[idx]] = opt.text;
+            bobotMap[labels[idx]] = opt.weight;
+          });
+          generatedItems.push({
+            nomor: i + 1,
+            subtes: 'TKP',
+            kategori: item.category,
+            model,
+            kesulitan,
+            pertanyaan: item.body,
+            opsi: optMap,
+            bobot: bobotMap,
+            pembahasan: item.explanation
+          });
+        }
+      } else {
+        const pool = staticTwk.filter(q => !kategori || q.category.toLowerCase().includes(kategori.toLowerCase()));
+        const src = pool.length >= count ? pool : staticTwk;
+        const shuffled = rng.shuffle([...src]);
+        for (let i = 0; i < count; i++) {
+          const item = shuffled[i % shuffled.length];
+          const labels = ['A', 'B', 'C', 'D', 'E'];
+          const optMap = {};
+          let correctLabel = 'A';
+          item.options.forEach((opt, idx) => {
+            optMap[labels[idx]] = opt.text;
+            if (opt.correct) correctLabel = labels[idx];
+          });
+          generatedItems.push({
+            nomor: i + 1,
+            subtes: 'TWK',
+            kategori: item.category,
+            model,
+            kesulitan,
+            pertanyaan: item.body,
+            opsi: optMap,
+            kunci: correctLabel,
+            pembahasan: item.explanation
+          });
+        }
+      }
+
+      return sendJson(res, 200, {
+        success: true,
+        meta: { subtes, kategori, model, kesulitan, total: generatedItems.length },
+        soal: generatedItems
+      });
     }
 
     // GET /api/exam/:id/result
