@@ -21,18 +21,16 @@ const MIME_TYPES = {
   '.ico': 'image/x-icon'
 };
 
-const server = http.createServer(async (req, res) => {
+const appHandler = (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
 
-  // Rute API -> serahkan ke apiHandler
-  if (pathname.startsWith('/api/')) {
+  if (pathname.startsWith('/api/') || pathname.startsWith('/api')) {
     return apiHandler(req, res);
   }
 
-  // File statis
   let safePath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, '');
-  if (safePath === '/' || safePath === '\\') {
+  if (safePath === '/' || safePath === '\\' || safePath === '') {
     safePath = '/index.html';
   }
 
@@ -60,7 +58,9 @@ const server = http.createServer(async (req, res) => {
     const stream = fs.createReadStream(filePath);
     stream.pipe(res);
   });
-});
+};
+
+const server = http.createServer(appHandler);
 
 function startServer(port) {
   server.listen(port, () => {
@@ -84,5 +84,7 @@ if (require.main === module) {
   startServer(DEFAULT_PORT);
 }
 
-module.exports = { server, startServer };
+appHandler.server = server;
+appHandler.startServer = startServer;
+module.exports = appHandler;
 

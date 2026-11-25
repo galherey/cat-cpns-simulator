@@ -2,7 +2,6 @@
   "name": "cat-cpns-simulator",
   "version": "0.1.0",
   "description": "Simulasi ujian CAT CPNS (SKD) dengan bank soal acak dan pembahasan langkah demi langkah",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "node test/smoke.js"
