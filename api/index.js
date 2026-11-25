@@ -13,6 +13,18 @@ const {
   getExamResult
 } = require('../lib/exam');
 
+// Leaderboard in-memory (diisi data awal realistis + hasil peserta aktif)
+const leaderboardRecords = [
+  { rank: 1, name: 'Nurul Hidayati', mode: 'sim100', twk: 120, tiu: 160, tkp: 198, total: 478, passed: true, timestamp: '10 Menit lalu' },
+  { rank: 2, name: 'Fajar Ramadhan', mode: 'sim100', twk: 115, tiu: 155, tkp: 192, total: 462, passed: true, timestamp: '25 Menit lalu' },
+  { rank: 3, name: 'Siti Rahmawati', mode: 'sim100', twk: 105, tiu: 150, tkp: 188, total: 443, passed: true, timestamp: '1 Jam lalu' },
+  { rank: 4, name: 'Rian Pratama', mode: 'sim100', twk: 95, tiu: 140, tkp: 190, total: 425, passed: true, timestamp: '2 Jam lalu' },
+  { rank: 5, name: 'Bambang Tri', mode: 'sim100', twk: 110, tiu: 75, tkp: 205, total: 390, passed: false, timestamp: '3 Jam lalu' }, // Gagal TIU < 80
+  { rank: 6, name: 'Anisa Kusuma', mode: 'sim100', twk: 85, tiu: 120, tkp: 180, total: 385, passed: true, timestamp: '4 Jam lalu' },
+  { rank: 7, name: 'Dedi Saputra', mode: 'sim100', twk: 60, tiu: 135, tkp: 175, total: 370, passed: false, timestamp: '5 Jam lalu' }, // Gagal TWK < 65
+  { rank: 8, name: 'Maya Anggraini', mode: 'sim100', twk: 90, tiu: 110, tkp: 165, total: 365, passed: true, timestamp: '6 Jam lalu' }
+];
+
 function sendJson(res, statusCode, data) {
   res.writeHead(statusCode, {
     'Content-Type': 'application/json; charset=utf-8',
@@ -23,18 +35,10 @@ function sendJson(res, statusCode, data) {
 
 function parseBody(req) {
   return new Promise((resolve, reject) => {
-    // Vercel serverless function mungkin sudah melakukan parse req.body
-    if (req.body && typeof req.body === 'object') {
-      return resolve(req.body);
-    }
+    if (req.body && typeof req.body === 'object') return resolve(req.body);
     if (req.body && typeof req.body === 'string') {
-      try {
-        return resolve(JSON.parse(req.body));
-      } catch (e) {
-        return resolve({});
-      }
+      try { return resolve(JSON.parse(req.body)); } catch (e) { return resolve({}); }
     }
-
     let body = '';
     req.on('data', chunk => {
       body += chunk;
@@ -42,11 +46,7 @@ function parseBody(req) {
     });
     req.on('end', () => {
       if (!body) return resolve({});
-      try {
-        resolve(JSON.parse(body));
-      } catch (err) {
-        resolve({});
-      }
+      try { resolve(JSON.parse(body)); } catch (err) { resolve({}); }
     });
     req.on('error', reject);
   });
@@ -70,13 +70,23 @@ module.exports = async (req, res) => {
   try {
     // 1. GET /api/modes
     if ((pathname === '/api/modes' || pathname === '/modes') && method === 'GET') {
+      return sendJson(res, 200, { success: true, modes: Object.values(MODES) });
+    }
+
+    // 2. GET /api/ranking (Leaderboard Live ala oneshotasn)
+    if ((pathname === '/api/ranking' || pathname === '/ranking') && method === 'GET') {
+      // Urutkan berdasarkan total tertinggi
+      const sorted = leaderboardRecords.slice().sort((a, b) => b.total - a.total);
+      sorted.forEach((item, idx) => { item.rank = idx + 1; });
       return sendJson(res, 200, {
         success: true,
-        modes: Object.values(MODES)
+        updatedAt: new Date().toLocaleTimeString('id-ID'),
+        totalParticipants: sorted.length,
+        ranking: sorted
       });
     }
 
-    // 2. POST /api/exam/start
+    // 3. POST /api/exam/start
     if ((pathname === '/api/exam/start' || pathname === '/exam/start') && method === 'POST') {
       const body = await parseBody(req);
       const session = createExamSession({
@@ -95,7 +105,7 @@ module.exports = async (req, res) => {
       });
     }
 
-    // 3. GET /api/exam/:id
+    // 4. GET /api/exam/:id
     const examGetMatch = pathname.match(/^(?:\/api)?\/exam\/([a-zA-Z0-9_-]+)$/);
     if (examGetMatch && method === 'GET') {
       const sessionId = examGetMatch[1];
@@ -106,7 +116,7 @@ module.exports = async (req, res) => {
       return sendJson(res, 200, { success: true, session: clientSession });
     }
 
-    // 4. POST /api/exam/:id/answer
+    // 5. POST /api/exam/:id/answer
     const examAnsMatch = pathname.match(/^(?:\/api)?\/exam\/([a-zA-Z0-9_-]+)\/answer$/);
     if (examAnsMatch && method === 'POST') {
       const sessionId = examAnsMatch[1];
@@ -119,7 +129,7 @@ module.exports = async (req, res) => {
       return sendJson(res, 200, { success: true, answer: result.answer });
     }
 
-    // 5. POST /api/exam/:id/submit
+    // 6. POST /api/exam/:id/submit
     const examSubmitMatch = pathname.match(/^(?:\/api)?\/exam\/([a-zA-Z0-9_-]+)\/submit$/);
     if (examSubmitMatch && method === 'POST') {
       const sessionId = examSubmitMatch[1];
@@ -127,10 +137,24 @@ module.exports = async (req, res) => {
       if (!result) {
         return sendJson(res, 404, { success: false, error: 'Sesi tidak ditemukan' });
       }
+
+      // Masukkan otomatis ke live leaderboard
+      const newEntry = {
+        name: result.userName || 'Peserta',
+        mode: result.modeId,
+        twk: Math.round(result.scores.normalized.twk),
+        tiu: Math.round(result.scores.normalized.tiu),
+        tkp: Math.round(result.scores.normalized.tkp),
+        total: Math.round(result.scores.normalized.total),
+        passed: result.scores.passingStatus.allPassed,
+        timestamp: 'Baru saja'
+      };
+      leaderboardRecords.unshift(newEntry);
+
       return sendJson(res, 200, { success: true, result });
     }
 
-    // 6. GET /api/exam/:id/result
+    // 7. GET /api/exam/:id/result
     const examResultMatch = pathname.match(/^(?:\/api)?\/exam\/([a-zA-Z0-9_-]+)\/result$/);
     if (examResultMatch && method === 'GET') {
       const sessionId = examResultMatch[1];
