@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Simulasi ujian CAT CPNS (SKD) dengan bank soal acak dan pembahasan langkah demi langkah",
   "scripts": {
-    "start": "node server.js",
     "test": "node test/smoke.js"
   },
   "engines": { "node": ">=18" },
