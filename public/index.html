@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulasi CAT CPNS - Bank Soal Acak & Pembahasan Lengkap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --primary-dark: #172554;
+      --accent: #d97706;
+      --success: #16a34a;
+      --warning: #eab308;
+      --danger: #dc2626;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Nav */
+    .cat-header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      background: #ffffff;
+      color: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.15rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      color: #93c5fd;
+    }
+
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.825rem;
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #fbbf24;
+      color: #78350f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+
+    .timer-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 0.35rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #38bdf8;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .timer-card.danger {
+      color: #f87171;
+      border-color: #ef4444;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 0.8; transform: scale(1); }
+      to { opacity: 1; transform: scale(1.02); }
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    /* Card Components */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03), 0 2px 4px -2px rgba(0,0,0,0.03);
+    }
+
+    /* Screen 1: Welcome & Setup */
+    .welcome-container {
+      max-width: 820px;
+      margin: 2rem auto;
+      padding: 2.25rem;
+    }
+
+    .welcome-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome-desc {
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      background: #fff;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .notice-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--primary-light);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      font-size: 0.875rem;
+      color: #1e40af;
+    }
+
+    .notice-box ul {
+      margin-left: 1.25rem;
+      margin-top: 0.35rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary-light);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .btn-warning {
+      background: var(--warning);
+      color: #78350f;
+    }
+
+    .btn-warning:hover {
+      background: #d97706;
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      background: #b91c1c;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* Screen 2: Exam CAT Interface */
+    .exam-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .exam-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left: Question Box */
+    .question-box {
+      padding: 1.75rem;
+    }
+
+    .question-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.25rem;
+    }
+
+    .subtest-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pill-twk { background: #fee2e2; color: #991b1b; }
+    .pill-tiu { background: #e0e7ff; color: #3730a3; }
+    .pill-tkp { background: #dcfce7; color: #166534; }
+
+    .category-tag {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .question-number-badge {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #1e293b;
+      margin-bottom: 1.75rem;
+      white-space: pre-line;
+      line-height: 1.65;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.9rem 1.15rem;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .option-item:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .option-item.selected {
+      border-color: var(--primary-light);
+      background: #eff6ff;
+      box-shadow: 0 0 0 1px var(--primary-light);
+    }
+
+    .option-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      background: #fff;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .option-item.selected .option-circle {
+      background: var(--primary-light);
+      color: #fff;
+      border-color: var(--primary-light);
+    }
+
+    .option-content {
+      flex: 1;
+      font-size: 0.95rem;
+      padding-top: 0.15rem;
+      line-height: 1.55;
+    }
+
+    .exam-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .action-group-left {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-group-right {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Right: Question Number Grid Palette */
+    .palette-box {
+      padding: 1.25rem;
+      position: sticky;
+      top: 5rem;
+    }
+
+    .palette-header {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .palette-legend {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .dot-answered { background: var(--success); }
+    .dot-doubt { background: var(--warning); }
+    .dot-unanswered { background: #f1f5f9; border: 1px solid #cbd5e1; }
+    .dot-active { background: var(--primary-light); }
+
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.45rem;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 0.35rem;
+    }
+
+    .num-btn {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .num-btn:hover {
+      transform: scale(1.05);
+      border-color: var(--primary-light);
+    }
+
+    .num-btn.answered {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+    }
+
+    .num-btn.doubt {
+      background: var(--warning);
+      color: #78350f;
+      border-color: var(--warning);
+    }
+
+    .num-btn.active {
+      box-shadow: 0 0 0 2px var(--primary-dark), 0 0 0 4px rgba(37, 99, 235, 0.4);
+      border-color: var(--primary-dark);
+      font-weight: 800;
+    }
+
+    /* Screen 3: Results & In-Depth Review */
+    .result-container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .status-banner {
+      padding: 1.75rem;
+      border-radius: 14px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+    }
+
+    .status-banner.passed {
+      background: linear-gradient(135deg, #15803d, #16a34a);
+    }
+
+    .status-banner.failed {
+      background: linear-gradient(135deg, #b91c1c, #dc2626);
+    }
+
+    .status-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .score-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .score-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .score-card {
+      padding: 1.25rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      text-align: center;
+    }
+
+    .score-card-subtest {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .score-card-value {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 0.35rem 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .score-card-target {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 0.4rem;
+    }
+
+    .badge-pass { background: #dcfce7; color: #166534; }
+    .badge-fail { background: #fee2e2; color: #991b1b; }
+
+    /* Review / Pembahasan Section */
+    .review-section {
+      margin-top: 2rem;
+    }
+
+    .review-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .filter-tab {
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .filter-tab.active {
+      background: var(--primary-dark);
+      color: #fff;
+      border-color: var(--primary-dark);
+    }
+
+    .review-card {
+      margin-bottom: 1.25rem;
+      padding: 1.5rem;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .review-card.correct {
+      border-left: 5px solid var(--success);
+    }
+
+    .review-card.incorrect {
+      border-left: 5px solid var(--danger);
+    }
+
+    .review-card.tkp-sub {
+      border-left: 5px solid var(--primary-light);
+    }
+
+    .review-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .explanation-box {
+      margin-top: 1.25rem;
+      padding: 1.15rem;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      font-size: 0.925rem;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .explanation-body {
+      white-space: pre-line;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CAT Top Header -->
+  <header class="cat-header">
+    <div class="brand-wrap">
+      <div class="brand-logo">CAT</div>
+      <div>
+        <div class="brand-title">SIMULASI UJIAN CPNS</div>
+        <div class="brand-sub">Sistem Ujian Berbasis Komputer & Bank Soal SKD Terstandar</div>
+      </div>
+    </div>
+
+    <div class="header-info">
+      <div id="headerUserBadge" class="user-badge hidden">
+        <div class="user-avatar" id="avatarInitial">P</div>
+        <div>
+          <strong id="headerUserName">Peserta</strong>
+          <span style="opacity: 0.7; font-size: 0.75rem;"> | </span>
+          <span id="headerParticipantNo">CPNS-2026</span>
+        </div>
+      </div>
+
+      <div id="headerTimer" class="timer-card hidden">
+        <span>⏱</span>
+        <span id="timerDisplay">00:00:00</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Area -->
+  <main>
+
+    <!-- SCREEN 1: Welcome & Setup Form -->
+    <div id="screenSetup" class="card welcome-container">
+      <h1 class="welcome-title">Selamat Datang di Simulasi CAT CPNS</h1>
+      <p class="welcome-desc">
+        Uji kemampuan Anda dengan bank soal ribuan butir yang diacak secara otomatis. Sistem menyediakan <strong>100 soal pilihan</strong> atau standar resmi 110 soal lengkap dengan <strong>penjelasan dan penyelesaian langkah demi langkah</strong> di akhir ujian.
+      </p>
+
+      <form id="startForm">
+        <div class="form-group">
+          <label class="form-label" for="userName">Nama Lengkap Peserta</label>
+          <input type="text" id="userName" class="form-input" placeholder="Masukkan nama Anda..." required value="Peserta Pejuang NIP">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="modeSelect">Mode Simulasi Ujian</label>
+          <select id="modeSelect" class="form-select">
+            <option value="sim100" selected>Simulasi 100 Soal Acak (TWK 27 · TIU 32 · TKP 41) - Durasi 90 Menit</option>
+            <option value="skd110">Simulasi SKD Resmi 110 Soal (TWK 30 · TIU 35 · TKP 45) - Durasi 100 Menit</option>
+            <option value="mini20">Mini Test 20 Soal Acak - Durasi 20 Menit</option>
+            <option value="twk25">Fokus Latihan TWK (25 Soal) - Durasi 25 Menit</option>
+            <option value="tiu25">Fokus Latihan TIU (25 Soal) - Durasi 35 Menit</option>
+            <option value="tkp25">Fokus Latihan TKP (25 Soal) - Durasi 25 Menit</option>
+          </select>
+        </div>
+
+        <div class="notice-box">
+          <strong>Aturan & Standar Penilaian CAT:</strong>
+          <ul>
+            <li><strong>TWK & TIU:</strong> Jawaban Benar bernilai <strong>+5</strong>, Salah/Kosong bernilai <strong>0</strong>.</li>
+            <li><strong>TKP:</strong> Setiap opsi bernilai <strong>1 sampai 5</strong>, tidak ada nilai minus.</li>
+            <li><strong>Passing Grade Acuan:</strong> TWK ≥ 65, TIU ≥ 80, TKP ≥ 156. Anda harus melampaui ketiga passing grade untuk dinyatakan memenuhi syarat.</li>
+            <li>Sistem menyimpan jawaban secara otomatis setiap kali Anda memilih opsi.</li>
+          </ul>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="padding: 0.9rem; font-size: 1.05rem;">
+          Mulai Ujian Sekarang »
+        </button>
+      </form>
+    </div>
+
+    <!-- SCREEN 2: CAT Exam Session Interface -->
+    <div id="screenExam" class="exam-layout hidden">
+      <!-- Left Panel: Question Box -->
+      <div class="card question-box">
+        <div class="question-top">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span id="questionNumBadge" class="question-number-badge">Soal No. 1</span>
+            <span id="subtestPill" class="subtest-pill pill-twk">TWK</span>
+            <span id="categoryTag" class="category-tag">Pilar Negara</span>
+          </div>
+          <div id="doubtIndicator" style="display: none; font-size: 0.8rem; font-weight: 700; color: #b45309; background: #fef3c7; padding: 0.2rem 0.6rem; border-radius: 6px;">
+            RAGU-RAGU
+          </div>
+        </div>
+
+        <div id="questionBody" class="question-text">
+          Memuat butir soal...
+        </div>
+
+        <div id="optionsList" class="options-list">
+          <!-- Option items populated by JS -->
+        </div>
+
+        <div class="exam-actions">
+          <div class="action-group-left">
+            <button id="btnPrev" class="btn btn-outline">« Sebelumnya</button>
+            <button id="btnDoubt" class="btn btn-warning">Ragu-Ragu</button>
+          </div>
+          <div class="action-group-right">
+            <button id="btnNext" class="btn btn-primary">Simpan & Lanjut »</button>
+            <button id="btnFinish" class="btn btn-danger" style="margin-left: 0.5rem;">Selesai Ujian</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Number Grid Palette -->
+      <div class="card palette-box">
+        <div class="palette-header">
+          <span>Daftar Soal</span>
+          <span id="answeredCounter" style="font-size: 0.8rem; color: var(--text-muted);">0 / 100</span>
+        </div>
+
+        <div class="palette-legend">
+          <div class="legend-item"><div class="legend-dot dot-answered"></div> Sudah Dijawab</div>
+          <div class="legend-item"><div class="legend-dot dot-doubt"></div> Ragu-Ragu</div>
+          <div class="legend-item"><div class="legend-dot dot-unanswered"></div> Belum Dijawab</div>
+          <div class="legend-item"><div class="legend-dot dot-active"></div> Sedang Dibuka</div>
+        </div>
+
+        <div id="numberGrid" class="number-grid">
+          <!-- 1..100 numbers injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: Results & In-Depth Review -->
+    <div id="screenResult" class="result-container hidden">
+      <!-- Status Banner -->
+      <div id="resultStatusBanner" class="status-banner passed">
+        <div>
+          <div class="status-title" id="resultStatusTitle">MEMENUHI PASSING GRADE</div>
+          <div id="resultStatusSub" style="opacity: 0.9; font-size: 0.95rem; margin-top: 0.25rem;">
+            Selamat! Anda berhasil melampaui seluruh ambang batas nilai SKD CPNS.
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 0.8rem; opacity: 0.85;">SKOR TOTAL</div>
+          <div id="resultScoreTotal" style="font-size: 2.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace;">425</div>
+        </div>
+      </div>
+
+      <!-- Score Breakdown Cards -->
+      <div class="score-cards-grid">
+        <div class="score-card">
+          <div class="score-card-subtest">TWK</div>
+          <div class="score-card-value" id="scoreTwk">0</div>
+          <div class="score-card-target">Passing Grade: 65</div>
+          <div id="badgeTwk" class="badge-status badge-pass">LULUS</div>
+        </div>
+
+        <div class="score-card">
+          <div class="score-card-subtest">TIU</div>
+          <div class="score-card-value" id="scoreTiu">0</div>
+          <div class="score-card-target">Passing Grade: 80</div>
+          <div id="badgeTiu" class="badge-status badge-pass">LULUS</div>
+        </div>
+
+        <div class="score-card">
+          <div class="score-card-subtest">TKP</div>
+          <div class="score-card-value" id="scoreTkp">0</div>
+          <div class="score-card-target">Passing Grade: 156</div>
+          <div id="badgeTkp" class="badge-status badge-pass">LULUS</div>
+        </div>
+
+        <div class="score-card">
+          <div class="score-card-subtest">Waktu Pengerjaan</div>
+          <div class="score-card-value" id="scoreTime" style="font-size: 1.5rem; margin: 0.8rem 0;">00:00</div>
+          <div class="score-card-target" id="scoreStatsSummary">100 Soal Selesai</div>
+          <button id="btnRetake" class="btn btn-outline" style="font-size: 0.75rem; padding: 0.3rem 0.6rem; margin-top: 0.4rem;">Ujian Baru</button>
+        </div>
+      </div>
+
+      <!-- In-Depth Review Section -->
+      <div class="review-section">
+        <div class="review-filter-bar">
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--primary-dark);">
+            Pembahasan & Penyelesaian Lengkap
+          </h2>
+
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">Semua Soal (<span id="countAll">0</span>)</button>
+            <button class="filter-tab" data-filter="wrong">Salah / Belum Maksimal (<span id="countWrong">0</span>)</button>
+            <button class="filter-tab" data-filter="twk">TWK</button>
+            <button class="filter-tab" data-filter="tiu">TIU</button>
+            <button class="filter-tab" data-filter="tkp">TKP</button>
+          </div>
+        </div>
+
+        <div id="reviewItemsContainer">
+          <!-- Injected detailed review cards with step-by-step solutions -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // State Aplikasi
+    let currentSession = null;
+    let currentPosition = 1;
+    let timerInterval = null;
+    let fullResult = null;
+    let currentFilter = 'all';
+
+    const screenSetup = document.getElementById('screenSetup');
+    const screenExam = document.getElementById('screenExam');
+    const screenResult = document.getElementById('screenResult');
+
+    const headerUserBadge = document.getElementById('headerUserBadge');
+    const headerUserName = document.getElementById('headerUserName');
+    const headerParticipantNo = document.getElementById('headerParticipantNo');
+    const avatarInitial = document.getElementById('avatarInitial');
+    const headerTimer = document.getElementById('headerTimer');
+    const timerDisplay = document.getElementById('timerDisplay');
+
+    // Inisialisasi Event Listener
+    document.getElementById('startForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const userName = document.getElementById('userName').value;
+      const modeId = document.getElementById('modeSelect').value;
+
+      try {
+        const res = await fetch('/api/exam/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userName, modeId })
+        });
+        const data = await res.json();
+        if (data.success) {
+          loadExamSession(data.sessionId);
+        } else {
+          alert('Gagal memulai sesi: ' + data.error);
+        }
+      } catch (err) {
+        alert('Gagal menghubungi server: ' + err.message);
+      }
+    });
+
+    async function loadExamSession(sessionId) {
+      try {
+        const res = await fetch(`/api/exam/${sessionId}`);
+        const data = await res.json();
+        if (!data.success) {
+          alert('Gagal memuat soal: ' + data.error);
+          return;
+        }
+
+        currentSession = data.session;
+        currentPosition = 1;
+
+        // Render Header
+        headerUserName.textContent = currentSession.userName;
+        headerParticipantNo.textContent = currentSession.participantNo;
+        avatarInitial.textContent = currentSession.userName.charAt(0).toUpperCase();
+        headerUserBadge.classList.remove('hidden');
+        headerTimer.classList.remove('hidden');
+
+        // Beralih ke layar ujian
+        screenSetup.classList.add('hidden');
+        screenResult.classList.add('hidden');
+        screenExam.classList.remove('hidden');
+
+        // Mulai Countdown Timer
+        startTimer(currentSession.deadlineAt);
+
+        // Render Kotak Nomor
+        renderNumberGrid();
+
+        // Tampilkan soal pertama
+        renderQuestion(1);
+      } catch (err) {
+        alert('Terjadi kesalahan memuat ujian: ' + err.message);
+      }
+    }
+
+    function startTimer(deadlineAt) {
+      if (timerInterval) clearInterval(timerInterval);
+
+      const update = () => {
+        const remaining = Math.max(0, Math.floor((deadlineAt - Date.now()) / 1000));
+        const hours = Math.floor(remaining / 3600);
+        const mins = Math.floor((remaining % 3600) / 60);
+        const secs = remaining % 60;
+
+        const f = (n) => String(n).padStart(2, '0');
+        timerDisplay.textContent = `${f(hours)}:${f(mins)}:${f(secs)}`;
+
+        if (remaining <= 300) {
+          headerTimer.classList.add('danger');
+        } else {
+          headerTimer.classList.remove('danger');
+        }
+
+        if (remaining <= 0) {
+          clearInterval(timerInterval);
+          alert('Waktu ujian telah berakhir! Sistem akan menyelesaikan ujian Anda secara otomatis.');
+          finishExam();
+        }
+      };
+
+      update();
+      timerInterval = setInterval(update, 1000);
+    }
+
+    function renderNumberGrid() {
+      const grid = document.getElementById('numberGrid');
+      grid.innerHTML = '';
+
+      let answeredCount = 0;
+
+      currentSession.questions.forEach(q => {
+        const btn = document.createElement('button');
+        btn.className = 'num-btn';
+        btn.textContent = q.position;
+        btn.dataset.position = q.position;
+
+        const ans = currentSession.answers[q.position];
+        if (ans && ans.selectedLabel) {
+          answeredCount++;
+          if (ans.isDoubt) {
+            btn.classList.add('doubt');
+          } else {
+            btn.classList.add('answered');
+          }
+        }
+
+        if (q.position === currentPosition) {
+          btn.classList.add('active');
+        }
+
+        btn.addEventListener('click', () => {
+          renderQuestion(q.position);
+        });
+
+        grid.appendChild(btn);
+      });
+
+      document.getElementById('answeredCounter').textContent = `${answeredCount} / ${currentSession.questions.length}`;
+    }
+
+    function renderQuestion(pos) {
+      currentPosition = pos;
+      const q = currentSession.questions.find(x => x.position === pos);
+      if (!q) return;
+
+      document.getElementById('questionNumBadge').textContent = `Soal No. ${q.position}`;
+
+      const pill = document.getElementById('subtestPill');
+      pill.textContent = q.subtest;
+      pill.className = `subtest-pill pill-${q.subtest.toLowerCase()}`;
+
+      document.getElementById('categoryTag').textContent = `${q.category} · ${q.difficulty}`;
+      document.getElementById('questionBody').textContent = q.body;
+
+      const userAns = currentSession.answers[q.position] || { selectedLabel: null, isDoubt: false };
+      const doubtIndicator = document.getElementById('doubtIndicator');
+      doubtIndicator.style.display = userAns.isDoubt ? 'inline-block' : 'none';
+
+      const optionsList = document.getElementById('optionsList');
+      optionsList.innerHTML = '';
+
+      q.options.forEach(opt => {
+        const item = document.createElement('div');
+        item.className = 'option-item';
+        if (userAns.selectedLabel === opt.label) {
+          item.classList.add('selected');
+        }
+
+        item.innerHTML = `
+          <div class="option-circle">${opt.label}</div>
+          <div class="option-content">${opt.text}</div>
+        `;
+
+        item.addEventListener('click', () => {
+          saveCurrentAnswer(q.position, opt.label, userAns.isDoubt);
+        });
+
+        optionsList.appendChild(item);
+      });
+
+      // Update active state di grid
+      document.querySelectorAll('.num-btn').forEach(btn => {
+        btn.classList.toggle('active', Number(btn.dataset.position) === pos);
+      });
+
+      // Update button state
+      document.getElementById('btnPrev').disabled = (pos === 1);
+      document.getElementById('btnNext').textContent = (pos === currentSession.questions.length) ? 'Simpan' : 'Simpan & Lanjut »';
+    }
+
+    async function saveCurrentAnswer(position, selectedLabel, isDoubt) {
+      currentSession.answers[position] = { selectedLabel, isDoubt };
+      renderQuestion(position);
+      renderNumberGrid();
+
+      try {
+        await fetch(`/api/exam/${currentSession.id}/answer`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ position, selectedLabel, isDoubt })
+        });
+      } catch (err) {
+        console.warn('Gagal sinkron jawaban ke server:', err);
+      }
+    }
+
+    // Navigasi
+    document.getElementById('btnPrev').addEventListener('click', () => {
+      if (currentPosition > 1) {
+        renderQuestion(currentPosition - 1);
+      }
+    });
+
+    document.getElementById('btnNext').addEventListener('click', () => {
+      if (currentPosition < currentSession.questions.length) {
+        renderQuestion(currentPosition + 1);
+      }
+    });
+
+    document.getElementById('btnDoubt').addEventListener('click', () => {
+      const userAns = currentSession.answers[currentPosition] || { selectedLabel: null, isDoubt: false };
+      saveCurrentAnswer(currentPosition, userAns.selectedLabel, !userAns.isDoubt);
+    });
+
+    document.getElementById('btnFinish').addEventListener('click', () => {
+      let unanswered = 0;
+      currentSession.questions.forEach(q => {
+        const a = currentSession.answers[q.position];
+        if (!a || !a.selectedLabel) unanswered++;
+      });
+
+      let confirmMsg = 'Apakah Anda yakin ingin menyelesaikan ujian sekarang?';
+      if (unanswered > 0) {
+        confirmMsg = `Masih ada ${unanswered} soal yang BELUM dijawab. Yakin ingin menyelesaikan ujian?`;
+      }
+
+      if (confirm(confirmMsg)) {
+        finishExam();
+      }
+    });
+
+    async function finishExam() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      try {
+        const res = await fetch(`/api/exam/${currentSession.id}/submit`, { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          renderResultScreen(data.result);
+        } else {
+          alert('Gagal menyelesaikan ujian: ' + data.error);
+        }
+      } catch (err) {
+        alert('Terjadi kendala jaringan saat submit ujian: ' + err.message);
+      }
+    }
+
+    // Render Halaman Hasil & Pembahasan
+    function renderResultScreen(result) {
+      fullResult = result;
+      screenExam.classList.add('hidden');
+      screenResult.classList.remove('hidden');
+      headerTimer.classList.add('hidden');
+
+      const scores = result.scores;
+      const isPassed = scores.passingStatus.allPassed;
+
+      // Status Banner
+      const banner = document.getElementById('resultStatusBanner');
+      banner.className = `status-banner ${isPassed ? 'passed' : 'failed'}`;
+      document.getElementById('resultStatusTitle').textContent = isPassed
+        ? 'MEMENUHI PASSING GRADE SKD'
+        : 'BELUM MEMENUHI PASSING GRADE';
+      document.getElementById('resultStatusSub').textContent = isPassed
+        ? 'Luar biasa! Nilai Anda pada TWK, TIU, dan TKP berhasil melampaui seluruh ambang batas resmi BKN.'
+        : 'Tetap semangat! Pelajari pembahasan langkah demi langkah di bawah untuk memperbaiki materi yang belum maksimal.';
+
+      // Total Skor
+      document.getElementById('resultScoreTotal').textContent = scores.normalized.total;
+
+      // Skor Subtes
+      const fmtScore = (sc) => typeof sc === 'number' ? sc : sc;
+      document.getElementById('scoreTwk').textContent = fmtScore(scores.normalized.twk);
+      document.getElementById('scoreTiu').textContent = fmtScore(scores.normalized.tiu);
+      document.getElementById('scoreTkp').textContent = fmtScore(scores.normalized.tkp);
+
+      // Status Badges
+      const setBadge = (elId, passed) => {
+        const el = document.getElementById(elId);
+        el.className = `badge-status ${passed ? 'badge-pass' : 'badge-fail'}`;
+        el.textContent = passed ? 'LULUS PG' : 'TIDAK LULUS';
+      };
+
+      setBadge('badgeTwk', scores.passingStatus.twk);
+      setBadge('badgeTiu', scores.passingStatus.tiu);
+      setBadge('badgeTkp', scores.passingStatus.tkp);
+
+      // Waktu pengerjaan
+      const mins = Math.floor(result.timeSpentSeconds / 60);
+      const secs = result.timeSpentSeconds % 60;
+      document.getElementById('scoreTime').textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      document.getElementById('scoreStatsSummary').textContent = `${result.stats.answeredCount} Terjawab · ${result.stats.unansweredCount} Kosong`;
+
+      // Hitung Counter Filter
+      let wrongCount = 0;
+      result.reviewItems.forEach(it => {
+        if (it.subtest === 'TKP') {
+          if (it.scoreAwarded < 5) wrongCount++;
+        } else {
+          if (it.scoreAwarded < 5) wrongCount++;
+        }
+      });
+
+      document.getElementById('countAll').textContent = result.reviewItems.length;
+      document.getElementById('countWrong').textContent = wrongCount;
+
+      renderReviewList();
+    }
+
+    function renderReviewList() {
+      const container = document.getElementById('reviewItemsContainer');
+      container.innerHTML = '';
+
+      const items = fullResult.reviewItems.filter(item => {
+        if (currentFilter === 'wrong') {
+          return item.scoreAwarded < 5;
+        }
+        if (currentFilter === 'twk') return item.subtest === 'TWK';
+        if (currentFilter === 'tiu') return item.subtest === 'TIU';
+        if (currentFilter === 'tkp') return item.subtest === 'TKP';
+        return true; // all
+      });
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        const isTkp = (item.subtest === 'TKP');
+        const isCorrect = (!isTkp && item.scoreAwarded === 5) || (isTkp && item.scoreAwarded === 5);
+
+        let cardClass = 'review-card ';
+        if (isTkp) {
+          cardClass += (item.scoreAwarded === 5) ? 'correct' : 'tkp-sub';
+        } else {
+          cardClass += isCorrect ? 'correct' : 'incorrect';
+        }
+        card.className = cardClass;
+
+        // Header Card
+        let scoreLabel = '';
+        if (isTkp) {
+          scoreLabel = `<span style="font-weight: 700; color: #15803d;">Skor Anda: ${item.scoreAwarded} / 5</span>`;
+        } else {
+          scoreLabel = isCorrect
+            ? `<span style="font-weight: 700; color: #16a34a;">Benar (+5)</span>`
+            : `<span style="font-weight: 700; color: #dc2626;">Salah (0)</span>`;
+        }
+
+        let optionsHtml = '';
+        item.options.forEach(opt => {
+          let optStyle = 'padding: 0.6rem 0.9rem; border-radius: 8px; margin-bottom: 0.4rem; font-size: 0.9rem; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;';
+          let optTag = '';
+
+          const isUserChoice = (item.userAnswer === opt.label);
+          const isBestChoice = (item.bestOption === opt.label);
+
+          if (isUserChoice && isBestChoice) {
+            optStyle += 'background: #dcfce7; border-color: #86efac; font-weight: 600;';
+            optTag = '<span style="font-size: 0.75rem; background: #16a34a; color: #fff; padding: 0.15rem 0.5rem; border-radius: 4px;">Pilihan Anda (Kunci)</span>';
+          } else if (isUserChoice && !isBestChoice) {
+            optStyle += 'background: #fee2e2; border-color: #fca5a5;';
+            optTag = '<span style="font-size: 0.75rem; background: #dc2626; color: #fff; padding: 0.15rem 0.5rem; border-radius: 4px;">Pilihan Anda</span>';
+          } else if (isBestChoice) {
+            optStyle += 'background: #eff6ff; border-color: #93c5fd; font-weight: 600;';
+            optTag = `<span style="font-size: 0.75rem; background: #2563eb; color: #fff; padding: 0.15rem 0.5rem; border-radius: 4px;">${isTkp ? 'Poin 5 (Maksimal)' : 'Kunci Jawaban'}</span>`;
+          }
+
+          if (isTkp && typeof opt.weight === 'number') {
+            optTag += ` <span style="font-size: 0.75rem; color: #64748b; margin-left: 0.5rem;">[Poin: ${opt.weight}]</span>`;
+          }
+
+          optionsHtml += `
+            <div style="${optStyle}">
+              <div><strong>${opt.label}.</strong> ${opt.text}</div>
+              <div>${optTag}</div>
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="review-head">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <strong>Soal No. ${item.position}</strong>
+              <span class="subtest-pill pill-${item.subtest.toLowerCase()}">${item.subtest}</span>
+              <span style="font-size: 0.8rem; color: #64748b;">${item.category}</span>
+            </div>
+            <div>${scoreLabel}</div>
+          </div>
+
+          <div style="font-size: 0.95rem; margin-bottom: 1rem; white-space: pre-line; line-height: 1.6;">
+            ${item.body}
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            ${optionsHtml}
+          </div>
+
+          <div class="explanation-box">
+            <div class="explanation-title">
+              💡 Pembahasan & Langkah Penyelesaian:
+            </div>
+            <div class="explanation-body">
+              ${item.explanation || 'Pembahasan telah diverifikasi oleh tim ahli standar CAT BKN.'}
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Filter Buttons
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentFilter = tab.dataset.filter;
+        renderReviewList();
+      });
+    });
+
+    document.getElementById('btnRetake').addEventListener('click', () => {
+      screenResult.classList.add('hidden');
+      screenSetup.classList.remove('hidden');
+      headerUserBadge.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
