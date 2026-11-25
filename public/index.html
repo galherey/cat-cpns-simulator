@@ -216,7 +216,7 @@
 
     .btn-amber { background: var(--accent-gold); color: #78350f; }
 
-    /* COMMAND CENTER HERO (Dashboard Hub Tengah) */
+    /* COMMAND CENTER HERO */
     .command-hub {
       background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
       border-bottom: 1px solid var(--border);
@@ -659,13 +659,9 @@
       border-bottom: 3px solid var(--brand-teal);
     }
 
-    .auth-form-wrap {
-      padding: 2rem;
-    }
+    .auth-form-wrap { padding: 2rem; }
 
-    .auth-input-group {
-      margin-bottom: 1.15rem;
-    }
+    .auth-input-group { margin-bottom: 1.15rem; }
 
     .auth-input-group label {
       display: block;
@@ -942,7 +938,7 @@
     </div>
   </header>
 
-  <!-- COMMAND CENTER HERO: Interactive Practice Launcher -->
+  <!-- COMMAND CENTER HERO -->
   <section class="command-hub">
     <div class="hub-container">
       <div class="hub-header">
@@ -957,7 +953,8 @@
       <div class="quick-launch-dock">
         <div class="dock-field">
           <label for="inputUserName">Nama Peserta</label>
-          <input type="text" id="inputUserName" class="dock-input" placeholder="Masukkan nama Anda..." value="Pejuang NIP 2026">
+          <input type="text" id="inputUserName" class="dock-input" placeholder="Masukkan nama Anda..." value="Pejuang NIP 2026"
+            onfocus="if(this.value==='Pejuang NIP 2026') this.value='';">
         </div>
 
         <div class="dock-field">
@@ -994,7 +991,6 @@
       </div>
 
       <div class="target-meters-grid">
-        <!-- TWK Meter -->
         <div class="meter-card meter-twk">
           <div class="meter-top">
             <span class="meter-code">TWK (Wawasan Kebangsaan)</span>
@@ -1004,13 +1000,10 @@
             <span class="meter-target-val">65</span>
             <span class="meter-max-val">/ 150 Poin Maksimal</span>
           </div>
-          <div class="meter-bar-track">
-            <div class="meter-bar-fill"></div>
-          </div>
+          <div class="meter-bar-track"><div class="meter-bar-fill"></div></div>
           <p class="meter-rule-note">Target minimal 13 butir soal benar. Menguji Nasionalisme, Bela Negara, Pilar Kebangsaan, Integritas, dan Bahasa Indonesia.</p>
         </div>
 
-        <!-- TIU Meter -->
         <div class="meter-card meter-tiu">
           <div class="meter-top">
             <span class="meter-code">TIU (Intelegensia Umum)</span>
@@ -1020,13 +1013,10 @@
             <span class="meter-target-val">80</span>
             <span class="meter-max-val">/ 175 Poin Maksimal</span>
           </div>
-          <div class="meter-bar-track">
-            <div class="meter-bar-fill"></div>
-          </div>
+          <div class="meter-bar-track"><div class="meter-bar-fill"></div></div>
           <p class="meter-rule-note">Target minimal 16 butir soal benar. Menguji Deret Aritmetika/Geometri, Soal Cerita Aljabar, Analogi Kata, dan Silogisme Logis.</p>
         </div>
 
-        <!-- TKP Meter -->
         <div class="meter-card meter-tkp">
           <div class="meter-top">
             <span class="meter-code">TKP (Karakteristik Pribadi)</span>
@@ -1036,9 +1026,7 @@
             <span class="meter-target-val">156</span>
             <span class="meter-max-val">/ 225 Poin Maksimal</span>
           </div>
-          <div class="meter-bar-track">
-            <div class="meter-bar-fill"></div>
-          </div>
+          <div class="meter-bar-track"><div class="meter-bar-fill"></div></div>
           <p class="meter-rule-note">Target rata-rata minimal 3.47 poin per soal. Tidak ada nilai 0 atau minus; utamakan respon yang mencerminkan core values BerAKHLAK.</p>
         </div>
       </div>
@@ -1054,7 +1042,6 @@
       </div>
 
       <div class="matrix-list">
-        <!-- Paket 1: 100 Soal Acak -->
         <div class="matrix-item featured">
           <div>
             <div class="matrix-title">
@@ -1063,79 +1050,50 @@
             </div>
             <p class="matrix-desc">Pengacakan 100 butir soal berimbang dari ribuan database. Nilai akhir dinormalkan langsung ke skala SKD resmi 110.</p>
           </div>
-
           <div class="matrix-specs">
             <div class="spec-row"><span class="spec-icon">✓</span> 100 Butir Soal (TWK 27 · TIU 32 · TKP 41)</div>
             <div class="spec-row"><span class="spec-icon">⏱</span> Waktu Pengerjaan: 90 Menit</div>
           </div>
-
-          <div>
-            <span class="matrix-difficulty-badge diff-adaptive">Stratifikasi Kesulitan</span>
-          </div>
-
-          <div>
-            <button class="btn btn-teal" onclick="triggerQuickLaunch('sim100')">Mulai Simulasi »</button>
-          </div>
+          <div><span class="matrix-difficulty-badge diff-adaptive">Stratifikasi Kesulitan</span></div>
+          <div><button class="btn btn-teal" onclick="triggerQuickLaunch('sim100')">Mulai Simulasi »</button></div>
         </div>
 
-        <!-- Paket 2: 110 Soal Resmi SKD BKN -->
         <div class="matrix-item">
           <div>
             <div class="matrix-title">Gladi Bersih SKD Resmi (110 Soal)</div>
             <p class="matrix-desc">Format paling mendekati hari H seleksi CPNS. Menampilkan 110 soal penuh dengan durasi 100 menit.</p>
           </div>
-
           <div class="matrix-specs">
             <div class="spec-row"><span class="spec-icon">✓</span> 110 Butir Soal (TWK 30 · TIU 35 · TKP 45)</div>
             <div class="spec-row"><span class="spec-icon">⏱</span> Waktu Pengerjaan: 100 Menit</div>
           </div>
-
-          <div>
-            <span class="matrix-difficulty-badge diff-official">Standar Penuh BKN</span>
-          </div>
-
-          <div>
-            <button class="btn btn-outline" onclick="triggerQuickLaunch('skd110')">Mulai Ujian »</button>
-          </div>
+          <div><span class="matrix-difficulty-badge diff-official">Standar Penuh BKN</span></div>
+          <div><button class="btn btn-outline" onclick="triggerQuickLaunch('skd110')">Mulai Ujian »</button></div>
         </div>
 
-        <!-- Paket 3: TIU Masterclass -->
         <div class="matrix-item">
           <div>
             <div class="matrix-title">TIU Masterclass (Numerik & Penalaran)</div>
             <p class="matrix-desc">Fokus mendalam pada subtes tersulit. Latihan deret angka bertingkat, pecahan desimal, soal cerita kecepatan, dan logika silogisme.</p>
           </div>
-
           <div class="matrix-specs">
             <div class="spec-row"><span class="spec-icon">✓</span> 25 Butir Soal Parametrik</div>
             <div class="spec-row"><span class="spec-icon">⏱</span> Waktu Pengerjaan: 35 Menit</div>
           </div>
-
-          <div>
-            <span class="matrix-difficulty-badge diff-drill">Fokus Numerik</span>
-          </div>
-
-          <div>
-            <button class="btn btn-outline" onclick="triggerQuickLaunch('tiu25')">Latihan TIU »</button>
-          </div>
+          <div><span class="matrix-difficulty-badge diff-drill">Fokus Numerik</span></div>
+          <div><button class="btn btn-outline" onclick="triggerQuickLaunch('tiu25')">Latihan TIU »</button></div>
         </div>
 
-        <!-- Paket 4: TWK & TKP Drilling -->
         <div class="matrix-item">
           <div>
             <div class="matrix-title">Drilling Subtes Spesifik (TWK / TKP)</div>
             <p class="matrix-desc">Pertajam penguasaan materi kebangsaan (Pilar Negara, UU ASN, Integritas) atau strategi membidik poin 5 pada TKP.</p>
           </div>
-
           <div class="matrix-specs">
             <div class="spec-row"><span class="spec-icon">✓</span> 25 Butir Soal per Sesi</div>
             <div class="spec-row"><span class="spec-icon">⏱</span> Waktu Pengerjaan: 25 Menit</div>
           </div>
-
-          <div>
-            <span class="matrix-difficulty-badge diff-drill">Penguatan Konsep</span>
-          </div>
-
+          <div><span class="matrix-difficulty-badge diff-drill">Penguatan Konsep</span></div>
           <div style="display: flex; gap: 0.5rem;">
             <button class="btn btn-outline" onclick="triggerQuickLaunch('twk25')">TWK »</button>
             <button class="btn btn-outline" onclick="triggerQuickLaunch('tkp25')">TKP »</button>
@@ -1154,14 +1112,12 @@
           </div>
           <p class="headline-sub">Peringkat langsung terbarui setiap kali ada peserta yang menyelesaikan simulasi ujian.</p>
         </div>
-
         <button class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;" onclick="fetchLeaderboard()">
           🔄 Sinkronkan Data
         </button>
       </div>
 
       <div class="ranking-hall-grid">
-        <!-- Hall of Fame Top 3 List -->
         <div class="hall-of-fame-top3">
           <div class="hof-title">
             <span>🏆 TOP 3 NASIONAL</span>
@@ -1170,7 +1126,6 @@
           <div id="hofList"></div>
         </div>
 
-        <!-- Main Leaderboard Table -->
         <div style="overflow-x: auto;">
           <table class="lb-table">
             <thead>
@@ -1206,16 +1161,25 @@
         <form id="formLogin">
           <div class="auth-input-group">
             <label for="loginEmail">Email</label>
-            <input type="email" id="loginEmail" class="auth-input" required placeholder="nama@email.com" value="pejuang@cpns.id">
+            <input type="email" id="loginEmail" class="auth-input" required placeholder="nama@email.com" value="pejuang@cpns.id"
+              onfocus="if(this.value==='pejuang@cpns.id') this.value='';"
+              onclick="if(this.value==='pejuang@cpns.id') this.value='';">
           </div>
 
           <div class="auth-input-group">
             <label for="loginPassword">Kata Sandi</label>
-            <input type="password" id="loginPassword" class="auth-input" required placeholder="Minimal 6 karakter" value="cpns2026">
+            <input type="password" id="loginPassword" class="auth-input" required placeholder="Minimal 6 karakter" value="cpns2026"
+              onfocus="if(this.value==='cpns2026') this.value='';"
+              onclick="if(this.value==='cpns2026') this.value='';">
           </div>
 
-          <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.25rem;">
-            💡 <em>Akun demo sudah terisi: pejuang@cpns.id / cpns2026</em>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+            <span style="font-size: 0.75rem; color: var(--text-muted);">
+              💡 <em>Klik kolom untuk mengosongkan teks</em>
+            </span>
+            <button type="button" style="background: none; border: none; font-size: 0.75rem; font-weight: 700; color: var(--brand-teal); cursor: pointer;" onclick="fillDemoCredentials()">
+              Isi Ulang Demo
+            </button>
           </div>
 
           <button type="submit" class="btn btn-teal" style="width: 100%; padding: 0.8rem; font-size: 0.95rem;">
@@ -1287,7 +1251,6 @@
     </div>
 
     <div class="exam-main-grid">
-      <!-- Left: Soal & Opsi -->
       <div class="exam-card">
         <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid var(--border); padding-bottom: 0.85rem; margin-bottom: 1.25rem;">
           <div style="display: flex; align-items: center; gap: 0.75rem;">
@@ -1314,7 +1277,6 @@
         </div>
       </div>
 
-      <!-- Right: Kotak Navigasi Nomor -->
       <div class="exam-card">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem;">
           <strong style="font-size: 0.95rem;">Navigasi Nomor Soal</strong>
@@ -1352,7 +1314,6 @@
         </div>
       </div>
 
-      <!-- Score Breakdown Row -->
       <div class="score-breakdown-row">
         <div class="eval-score-card">
           <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">TWK (Target ≥ 65)</div>
@@ -1379,7 +1340,6 @@
         </div>
       </div>
 
-      <!-- Pembahasan Lengkap -->
       <div style="margin-top: 3rem;">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
           <h4 style="font-size: 1.35rem; font-weight: 800; color: var(--brand-dark);">💡 Pembahasan & Langkah Penyelesaian</h4>
@@ -1408,7 +1368,6 @@
   </footer>
 
   <script>
-    // State Aplikasi
     let currentUser = null;
     let currentSession = null;
     let currentPosition = 1;
@@ -1422,9 +1381,7 @@
       setInterval(fetchLeaderboard, 30000);
     });
 
-    // -------------------------------------------------------------
-    // AUTH LOGIC (MASUK & DAFTAR GRATIS)
-    // -------------------------------------------------------------
+    // AUTH LOGIC
     function openAuthModal(mode) {
       document.getElementById('authAlert').style.display = 'none';
       switchAuthTab(mode || 'login');
@@ -1450,10 +1407,15 @@
       el.style.display = 'block';
     }
 
+    function fillDemoCredentials() {
+      document.getElementById('loginEmail').value = 'pejuang@cpns.id';
+      document.getElementById('loginPassword').value = 'cpns2026';
+    }
+
     // Submit Login
     document.getElementById('formLogin').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
+      const email = document.getElementById('loginEmail').value.trim();
       const password = document.getElementById('loginPassword').value;
 
       try {
@@ -1479,9 +1441,9 @@
     // Submit Register
     document.getElementById('formRegister').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('regName').value;
-      const email = document.getElementById('regEmail').value;
-      const phone = document.getElementById('regPhone').value;
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const phone = document.getElementById('regPhone').value.trim();
       const targetAgency = document.getElementById('regTarget').value;
       const password = document.getElementById('regPassword').value;
 
@@ -1562,9 +1524,7 @@
       updateAuthUI();
     }
 
-    // -------------------------------------------------------------
-    // LEADERBOARD LOGIC
-    // -------------------------------------------------------------
+    // LEADERBOARD
     async function fetchLeaderboard() {
       try {
         const res = await fetch('/api/ranking');
@@ -1605,9 +1565,7 @@
       `).join('');
     }
 
-    // -------------------------------------------------------------
     // EXAM LAUNCHER
-    // -------------------------------------------------------------
     function triggerQuickLaunch(modeId) {
       document.getElementById('selectModeHub').value = modeId;
       startFromDock();
@@ -1634,7 +1592,6 @@
       }
     }
 
-    // CAT Exam Runner Session
     async function launchExamRunner(sessionId) {
       try {
         const res = await fetch(`/api/exam/${sessionId}`);
@@ -1795,7 +1752,7 @@
       }
     }
 
-    // Result Studio & Solutions
+    // Result Studio
     function openResultStudio(result) {
       resultPayload = result;
       document.getElementById('catResultModal').classList.add('active');
